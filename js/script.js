@@ -1,32 +1,22 @@
+// Auto-load all images from images.json and show slideshow
+fetch("images/images.json")
+  .then(res => res.json())
+  .then(imageFiles => {
+    const slideshow = document.getElementById("slideshow");
 
-// Smooth scroll highlight for navbar
-document.addEventListener("scroll", () => {
-  const sections = document.querySelectorAll("section");
-  const navLinks = document.querySelectorAll("nav a");
-  let current = "";
-  sections.forEach(section => {
-    const sectionTop = section.offsetTop;
-    if (scrollY >= sectionTop - 100) current = section.getAttribute("id");
+    imageFiles.forEach((file, i) => {
+      const img = document.createElement("img");
+      img.src = `images/${file}`;
+      if (i === 0) img.classList.add("active");
+      slideshow.appendChild(img);
+    });
+
+    let current = 0;
+    const slides = document.querySelectorAll("#slideshow img");
+
+    setInterval(() => {
+      slides[current].classList.remove("active");
+      current = (current + 1) % slides.length;
+      slides[current].classList.add("active");
+    }, 4000);
   });
-  navLinks.forEach(a => {
-    a.classList.remove("active");
-    if (a.getAttribute("href") === "#" + current) a.classList.add("active");
-  });
-});
-
-// Auto-load all images from /images folder (requires filenames to be known)
-const imageGallery = document.getElementById("imageGallery");
-const imageList = [
-  "container-01.jpg",
-  "container-02.jpg",
-  "plant-view.jpg",
-  "team-photo.jpg"
-  // 👆 add more filenames here
-];
-
-imageList.forEach(imgName => {
-  const img = document.createElement("img");
-  img.src = `images/${imgName}`;
-  img.alt = imgName;
-  imageGallery.appendChild(img);
-});
