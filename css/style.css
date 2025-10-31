@@ -1,175 +1,122 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Poppins', sans-serif; background: #000; color: #fff; overflow-x: hidden; }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #030712, #061d2f, #02141f);
-  color: #f0f0f0;
-  overflow-x: hidden;
-}
-
-/* HEADER */
 header {
+  background: #0b0b0b;
+  padding: 20px 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 8%;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(8px);
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
 }
 
-.site-logo {
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
   height: 60px;
-  transition: transform 0.3s;
+  width: 60px;
+  border-radius: 50%;
+  border: 2px solid #00ffd5;
+  transition: 0.3s;
 }
 
-.site-logo:hover {
+.logo:hover {
   transform: scale(1.1);
 }
 
+header h1 {
+  font-size: 1.5rem;
+  color: #00ffd5;
+  letter-spacing: 1px;
+}
+
 nav a {
-  color: #fff;
-  margin-left: 25px;
+  color: #f0f0f0;
+  margin: 0 15px;
   text-decoration: none;
   font-weight: 500;
   transition: 0.3s;
 }
 
 nav a:hover {
-  color: #00ffe5;
+  color: #00ffd5;
 }
 
-/* HERO SECTION */
 .hero {
-  height: 100vh;
+  position: relative;
+  height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  padding: 100px 20px;
-  background: url('../images/mypic1.jpg') center/cover no-repeat;
-  position: relative;
-}
-
-.hero::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-}
-
-.hero-content {
-  position: relative;
-  z-index: 1;
-  max-width: 800px;
-}
-
-.glow-text {
-  font-size: 3rem;
-  color: #00ffe5;
-  text-shadow: 0 0 15px #00ffe5, 0 0 25px #00a5a5;
-}
-
-.tagline {
-  font-size: 1.2rem;
-  margin-top: 10px;
-  color: #9eeaff;
-  letter-spacing: 1px;
-}
-
-.intro {
-  margin-top: 20px;
-  font-size: 1rem;
-  color: #ddd;
-  line-height: 1.6;
-}
-
-.btn {
-  display: inline-block;
-  margin-top: 30px;
-  padding: 12px 30px;
-  border-radius: 30px;
-  background: #00ffe5;
-  color: #000;
-  font-weight: 600;
-  text-decoration: none;
-  transition: 0.3s;
-}
-
-.btn:hover {
-  background: #fff;
-  color: #000;
-}
-
-/* GALLERY */
-.gallery-title {
-  text-align: center;
-  font-size: 2.2rem;
-  margin: 80px 0 30px;
-  color: #00ffe5;
-  text-shadow: 0 0 10px #00ffe5;
-}
-
-.slideshow-container {
-  width: 90%;
-  max-width: 1000px;
-  height: 500px;
-  margin: 0 auto 100px;
   overflow: hidden;
-  position: relative;
-  border-radius: 20px;
-  box-shadow: 0 0 30px rgba(0, 255, 229, 0.3);
 }
 
-.slideshow-container img {
-  width: 100%;
-  height: 500px;
-  object-fit: cover;
+.slideshow {
   position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.slideshow img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   opacity: 0;
   transition: opacity 1.5s ease-in-out;
 }
 
-.slideshow-container img.active {
+.slideshow img.active {
   opacity: 1;
 }
 
-/* CONTACT */
-.contact {
+.overlay {
+  position: relative;
+  text-align: center;
+  z-index: 2;
+}
+
+.overlay h2 {
+  font-size: 2.5rem;
+  color: #00ffd5;
+  text-shadow: 0 0 10px #00ffd5;
+}
+
+.overlay p {
+  margin-top: 15px;
+  font-size: 1.2rem;
+  color: #ccc;
+}
+
+.about, .contact {
   padding: 80px 10%;
+  max-width: 900px;
+  margin: auto;
   text-align: center;
 }
 
-.contact form {
-  margin-top: 40px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  max-width: 450px;
-  margin-inline: auto;
+.about h2, .contact h2 {
+  color: #00ffd5;
+  margin-bottom: 20px;
 }
 
 input, textarea {
+  width: 100%;
   padding: 12px;
+  border-radius: 8px;
   border: none;
-  border-radius: 10px;
   background: #111;
   color: #fff;
 }
 
 input[type="submit"] {
-  background: #00ffe5;
+  background: #00ffd5;
   color: #000;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
   transition: 0.3s;
 }
@@ -178,11 +125,9 @@ input[type="submit"]:hover {
   background: #fff;
 }
 
-/* FOOTER */
 footer {
-  background: #01090f;
-  padding: 25px;
   text-align: center;
-  color: #888;
-  border-top: 1px solid #00ffe5;
+  padding: 20px;
+  background: #0b0b0b;
+  color: #777;
 }
