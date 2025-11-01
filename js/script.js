@@ -1,8 +1,7 @@
 (async function () {
   // ---------- Config ----------
   const jsonPath = 'images/images.json';
-  const slideshowId = 'imageGallery';
-  const quoteId = 'quoteBox';
+  const slideshowId = 'slideshow'; // ✅ matches index.html
   const slideIntervalMs = 3800;
   const quoteIntervalMs = 4200;
 
@@ -14,10 +13,13 @@
       el.style.opacity = "0";
       el.style.transition = "opacity 0.6s ease";
     });
-    elements[0].style.display = "block";
-    setTimeout(() => elements[0].style.opacity = "1", 100);
+    if (elements.length > 0) {
+      elements[0].style.display = "block";
+      setTimeout(() => elements[0].style.opacity = "1", 100);
+    }
 
     setInterval(() => {
+      if (elements.length === 0) return;
       elements[index].style.opacity = "0";
       setTimeout(() => {
         elements[index].style.display = "none";
@@ -35,7 +37,10 @@
     try {
       const res = await fetch(jsonPath);
       const data = await res.json();
-      if (!data.images) return;
+      if (!data.images || !Array.isArray(data.images)) {
+        console.error("Invalid JSON format: missing 'images' array");
+        return;
+      }
 
       data.images.forEach(imgName => {
         const img = document.createElement("img");
@@ -104,5 +109,4 @@
   document.addEventListener("DOMContentLoaded", () => document.body.classList.add("page-loaded"));
   await loadImages();
   rotateQuotes();
-
 })();
