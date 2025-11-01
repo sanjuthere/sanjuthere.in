@@ -325,12 +325,12 @@ body {
   transform: translateY(30px);
 }
 /* ========== FIXED IMAGE SLIDESHOW SIZE ========== */
-/* slideshow small - fixed frame, smoother, smaller */
+/* slideshow small - fixed frame and overlapping images */
 .slideshow.small {
   position: relative;
   width: 100%;
-  max-width: 520px;      /* smaller width for better laptop fit */
-  height: 280px;         /* fixed height */
+  max-width: 520px;   /* balanced for laptops */
+  height: 280px;      /* fixed height */
   overflow: hidden;
   border-radius: 14px;
   border: 1px solid rgba(255,255,255,0.04);
@@ -339,16 +339,16 @@ body {
 }
 
 .slideshow.small img {
-  position: absolute;
+  position: absolute;   /* <== KEY line to make images overlap */
   width: 100%;
   height: 100%;
   object-fit: cover;
-  left: 0;
   top: 0;
+  left: 0;
   opacity: 0;
   transition: opacity 1s ease-in-out;
 }
 
 .slideshow.small img.active {
-  opacity: 1;
+  opacity: 1;  /* Only one image visible at a time */
 }
