@@ -3,10 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>SANJUTHERE.IN — Innovation in Motion</title>
+  <title>SANJUTHERE.IN — Precision CAE & FEA Engineering</title>
 
   <link rel="stylesheet" href="css/style.css" />
-  <!-- Poppins from Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -14,93 +13,88 @@
   <header class="site-header">
     <a class="brand" href="#home" aria-label="Home">
       <img src="images/logo.png" alt="Sanjuthere Logo" class="brand-logo">
-      <img src="images/sanjuthere-metal.png" alt="Sanjuthere Text" class="brand-text">
+      <img src="images/sanjuthere-metal.jpg" alt="Sanjuthere Text" class="brand-text">
     </a>
 
     <nav class="main-nav" aria-label="Main navigation">
       <a href="#home">Home</a>
-      <a href="#services">Services</a>
-      <a href="#gallery">Gallery</a>
+      <a href="#about">About</a>
+      <a href="#portfolio">Portfolio</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
 
-  <!-- Hero / Intro -->
   <main>
+    <!-- Hero / Intro -->
     <section id="home" class="hero">
       <div class="hero-inner">
-        <h1>Sanjeev There</h1>
-        <p class="subtitle">Cloud & DevOps Engineer — 15+ years in IT, 4 years specializing in Cloud & DevOps</p>
-        <p class="lead">I help startups and businesses automate, deploy, and scale reliably — CI/CD, cloud migrations, monitoring, and managed DevOps.</p>
+        <h1>SANJUTHERE.IN</h1>
+        <p class="subtitle">Advanced CAE & FEA Engineering — Simulation • Structural Analysis • Mechanical Design</p>
+        <p class="lead">We deliver engineering-grade simulation, finite element analysis, and realistic 3D visualizations to help manufacturers, designers and engineers make precise, data-driven decisions.</p>
         <div class="hero-cta">
-          <a class="btn primary" href="#contact">Hire Me</a>
-          <a class="btn ghost" href="#services">View Services</a>
+          <a class="btn primary" href="#contact">Request a Quotation</a>
+          <a class="btn ghost" href="#portfolio">View Portfolio</a>
         </div>
       </div>
     </section>
 
-    <!-- Two-column: slideshow (left) + quote box (right) -->
-    <section id="gallery" class="media-quote-section">
+    <!-- 2-column: slideshow (left) + quote box (right) -->
+    <section id="portfolio" class="media-quote-section">
       <div class="media-left">
-        <h2 class="section-title">Visual Gallery</h2>
-        <div id="slideshow" class="slideshow small"></div>
-        <p class="hint"></p>
+        <h2 class="section-title">Container Visuals & Project Gallery</h2>
+        <div id="slideshow" class="slideshow small" aria-live="polite"></div>
+        <p class="hint">Images and renders are auto-loaded from <code>/images/images.json</code>. Add new filenames there to include them in the gallery.</p>
       </div>
 
       <aside class="quote-right">
-        <h3 class="quote-title">Thoughts & Insights</h3>
-        <div id="quoteBox" class="quote-box">
+        <h3 class="quote-title">Engineering Insights</h3>
+        <div id="quoteBox" class="quote-box" role="region" aria-label="Engineering quotes">
           <!-- quotes inserted by JS -->
         </div>
         <div class="quote-controls">
-          <button id="prevQuote" class="small">⟨ Prev</button>
-          <button id="nextQuote" class="small">Next ⟩</button>
+          <button id="prevQuote" class="small" aria-label="Previous quote">⟨ Prev</button>
+          <button id="nextQuote" class="small" aria-label="Next quote">Next ⟩</button>
         </div>
       </aside>
     </section>
 
-    <!-- Services -->
-    <section id="services" class="services">
-      <h2 class="section-title centered">Services I Offer</h2>
-      <div class="cards">
-        <article class="card">
-          <h4>Quick DevOps Audit</h4>
-          <p>1–2 day assessment with clear remediation steps and cost/performance estimates.</p>
-          <p class="price">₹5k–₹15k / $100–$200</p>
+    <!-- About / Services -->
+    <section id="about" class="about">
+      <h2 class="section-title centered">About Our Engineering Practice</h2>
+      <p class="about-text">
+        SANJUTHERE.IN offers professional CAE and FEA services focused on mechanical structures and container strength analysis. With 15+ years in IT and 4 years of specialized experience in engineering simulation, we combine software-driven workflows with practical mechanical understanding.
+      </p>
+
+      <div class="service-cards">
+        <article class="service">
+          <h4>FEA & Structural Analysis</h4>
+          <p>Linear and nonlinear static analysis, modal and dynamic response, fatigue estimation, and buckling checks for mechanical and structural components.</p>
         </article>
 
-        <article class="card">
-          <h4>CI/CD & Automation</h4>
-          <p>Build reliable pipelines (GitHub Actions, Jenkins), containerization (Docker) and deployment automation.</p>
-          <p class="price">₹25k–₹60k / $300–$700</p>
+        <article class="service">
+          <h4>3D Modeling & Pre-processing</h4>
+          <p>Model cleanup, mesh strategy, boundary condition setup, and model preparation for accurate simulation results and quick iteration.</p>
         </article>
 
-        <article class="card">
-          <h4>Managed DevOps (Retainer)</h4>
-          <p>Ongoing monitoring, backups, security, and improvements — weekly reports and support.</p>
-          <p class="price">₹30k–₹1L / $400–$1200</p>
+        <article class="service">
+          <h4>Post-processing & Reporting</h4>
+          <p>Interpretation of results, safety factors, optimization recommendations and professional reports with visuals for manufacturing or client review.</p>
         </article>
       </div>
     </section>
 
-    <!-- About -->
-    <section id="about" class="about">
-      <h2 class="section-title centered">About Me</h2>
-      <p class="about-text">I’m Sanjeev — 15+ years in the IT industry with 4 years focused on cloud & DevOps. I combine practical engineering with leadership experience to deliver production-ready systems that are maintainable, cost-efficient and secure.</p>
-    </section>
-
     <!-- Contact -->
     <section id="contact" class="contact">
-      <h2 class="section-title centered">Contact / Hire</h2>
-      <p class="lead centered">Ready to start? Email <a href="mailto:hello@sanjuthere.in">hello@sanjuthere.in</a> or use the form below.</p>
+      <h2 class="section-title centered">Contact / Request a Simulation</h2>
+      <p class="lead centered">Please describe your project and expected deliverables. We respond with an initial proposal and timeline.</p>
 
       <form class="contact-form" action="https://formspree.io/f/maylwjrb" method="POST">
         <input type="text" name="name" placeholder="Your name" required>
         <input type="email" name="email" placeholder="Your email" required>
-        <input type="text" name="company" placeholder="Company (optional)">
-        <textarea name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+        <input type="text" name="company" placeholder="Company / Organization (optional)">
+        <textarea name="message" rows="5" placeholder="Briefly describe your project, model files you can share, and deadline." required></textarea>
         <div class="form-row">
-          <button type="submit" class="btn primary">Send Message</button>
+          <button type="submit" class="btn primary">Send Request</button>
           <a class="btn ghost" href="mailto:hello@sanjuthere.in">Email Directly</a>
         </div>
       </form>
@@ -109,7 +103,7 @@
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <div>© 2025 SANJUTHERE.IN — Innovation in Motion</div>
+      <div>© 2025 Sanjeev There. Engineering the Future with Precision Simulation.</div>
       <div class="small">Hyderabad, India · Available worldwide</div>
     </div>
   </footer>
