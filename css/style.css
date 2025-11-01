@@ -327,13 +327,14 @@ body {
 /* ========== FIXED IMAGE SLIDESHOW SIZE ========== */
 #slideshow {
   width: 100%;
-  max-width: 650px; /* adjust if you want narrower or wider */
-  height: 380px; /* fixed height for all images */
+  max-width: 550px; /* adjust if you want narrower or wider */
+  height: 320px; /* fixed height for all images */
   overflow: hidden;
   position: relative;
   border-radius: 12px;
   background: #f5f7fa;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  background: #fff;
 }
 
 #slideshow img {
@@ -341,7 +342,6 @@ body {
   height: 100%;
   object-fit: cover; /* keeps proportions, fills box */
   position: absolute;
-  top: 0;
-  left: 0;
-  transition: opacity 0.6s ease;
+  border-radius: 12px;
+  transition: opacity 1s ease-in-out;
 }
