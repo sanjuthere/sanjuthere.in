@@ -327,8 +327,8 @@ body {
 /* ========== FIXED IMAGE SLIDESHOW SIZE ========== */
 #slideshow {
   width: 100%;
-  max-width: 800px; /* adjust if you want narrower or wider */
-  height: 450px; /* fixed height for all images */
+  max-width: 650px; /* adjust if you want narrower or wider */
+  height: 380px; /* fixed height for all images */
   overflow: hidden;
   position: relative;
   border-radius: 12px;
