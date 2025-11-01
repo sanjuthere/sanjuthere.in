@@ -325,23 +325,30 @@ body {
   transform: translateY(30px);
 }
 /* ========== FIXED IMAGE SLIDESHOW SIZE ========== */
-#slideshow {
-  width: 100%;
-  max-width: 550px; /* adjust if you want narrower or wider */
-  height: 320px; /* fixed height for all images */
-  overflow: hidden;
+/* slideshow small - fixed frame, smoother, smaller */
+.slideshow.small {
   position: relative;
-  border-radius: 12px;
-  background: #f5f7fa;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  background: #fff;
+  width: 100%;
+  max-width: 520px;      /* smaller width for better laptop fit */
+  height: 280px;         /* fixed height */
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.04);
+  background: #0b141a;
+  box-shadow: 0 8px 28px rgba(0, 255, 213, 0.05);
 }
 
-#slideshow img {
+.slideshow.small img {
+  position: absolute;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* keeps proportions, fills box */
-  position: absolute;
-  border-radius: 12px;
+  object-fit: cover;
+  left: 0;
+  top: 0;
+  opacity: 0;
   transition: opacity 1s ease-in-out;
+}
+
+.slideshow.small img.active {
+  opacity: 1;
 }
