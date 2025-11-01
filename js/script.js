@@ -1,7 +1,5 @@
-/* script.js
- - Loads images list from images/images.json
- - Creates slideshow on left and rotating quote box on right
- - Minimal, dependency-free
+/* script.js — loads images/images.json for slideshow and provides rotating quote box
+   Works on static GitHub Pages (no server required).
 */
 
 (async function(){
@@ -10,16 +8,15 @@
   const slideshowId = 'slideshow';
   const quoteId = 'quoteBox';
   const slideIntervalMs = 3800;
-  const quoteIntervalMs = 4200;
+  const quoteIntervalMs = 4400;
 
-  // Simple quotes (you can edit)
+  // Engineering / CAE style quotes (edit or extend)
   const quotes = [
-    "Automate everything — repeatable steps reduce mistakes.",
-    "Infrastructure as code: treat your infra like software.",
-    "Small, consistent improvements beat occasional big rewrites.",
-    "Monitor first, optimize later — data drives decisions.",
-    "Ship small. Ship often. Learn faster.",
-    "Security and backups are not optional — they are guarantees."
+    "Simulate with clarity — design with confidence.",
+    "FEA reveals what the eye alone cannot see.",
+    "Precision modeling reduces rework and accelerates manufacturing.",
+    "Good meshing is the foundation of reliable results.",
+    "Optimize structures, reduce weight, and keep strength where it matters."
   ];
 
   // ---------- Helper to fetch images JSON ----------
@@ -28,10 +25,10 @@
       const resp = await fetch(path, {cache: "no-cache"});
       if (!resp.ok) throw new Error('Not found');
       const list = await resp.json();
-      // filter to jpg/png files only
+      // filter allowed types
       return list.filter(fn => /\.(jpe?g|png|webp|svg)$/i.test(fn));
     } catch (err) {
-      console.warn('Could not load images.json — falling back to manual list.', err);
+      console.warn('Could not load images.json — falling back to empty list.', err);
       return [];
     }
   }
@@ -42,8 +39,7 @@
     if (!container) return;
     container.innerHTML = '';
     if (!list.length){
-      // fallback message
-      container.innerHTML = '<div style="color:#cfeeea;padding:20px">No images listed in images/images.json</div>';
+      container.innerHTML = '<div style="padding:20px;color:#334155">No images listed in images/images.json</div>';
       return;
     }
     list.forEach((file, i) => {
@@ -52,7 +48,6 @@
       img.alt = file;
       if (i===0) img.classList.add('active');
       container.appendChild(img);
-      // optional: add small onerror fallback
       img.onerror = () => { img.style.display='none'; };
     });
 
@@ -76,7 +71,7 @@
     p.className = 'quote-text';
     p.textContent = quotes[0];
     qbox.appendChild(p);
-    // controls
+
     let qi = 0;
     function showQuote(i){
       p.classList.remove('show');
@@ -85,13 +80,14 @@
         p.classList.add('show');
       }, 200);
     }
+
     // auto cycle
     setInterval(()=> {
       qi = (qi+1) % quotes.length;
       showQuote(qi);
     }, quoteIntervalMs);
 
-    // manual control buttons
+    // manual control
     const prev = document.getElementById('prevQuote');
     const next = document.getElementById('nextQuote');
     if(prev) prev.addEventListener('click', ()=> {
@@ -104,10 +100,10 @@
     });
 
     // show first
-    setTimeout(()=> p.classList.add('show'), 100);
+    setTimeout(()=> p.classList.add('show'), 120);
   }
 
-  // ---------- Init: fetch images and build ----------
+  // ---------- Init ----------
   const images = await fetchImageList(jsonPath);
   buildSlideshow(images);
   buildQuotes();
