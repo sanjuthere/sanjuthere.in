@@ -1,5 +1,5 @@
 // -----------------------------
-// IMAGE SLIDESHOW
+// IMAGE SLIDESHOW (TOP SECTION)
 // -----------------------------
 let slideIndex = 0;
 const slides = document.querySelectorAll('.slideshow img');
@@ -49,6 +49,54 @@ function rotateQuotes() {
 }
 
 setInterval(rotateQuotes, 4000);
+
+
+// -----------------------------
+// IMAGE GALLERY (FROM images/images.json)
+// -----------------------------
+document.addEventListener("DOMContentLoaded", async () => {
+  const imageGallery = document.getElementById("imageGallery");
+  if (!imageGallery) return;
+
+  try {
+    const response = await fetch("images/images.json");
+    const data = await response.json();
+    const images = data.images;
+
+    if (!images || images.length === 0) {
+      imageGallery.textContent = "No images found.";
+      return;
+    }
+
+    images.forEach((imgName, index) => {
+      const img = document.createElement("img");
+      img.src = `images/${imgName}`;
+      img.alt = `Container Image ${index + 1}`;
+      img.classList.add("slide-img");
+      if (index !== 0) img.style.display = "none";
+      imageGallery.appendChild(img);
+    });
+
+    // Fade animation for gallery images
+    let current = 0;
+    const galleryImages = imageGallery.querySelectorAll("img");
+
+    function showNextImage() {
+      galleryImages[current].style.opacity = 0;
+      setTimeout(() => {
+        galleryImages[current].style.display = "none";
+        current = (current + 1) % galleryImages.length;
+        galleryImages[current].style.display = "block";
+        setTimeout(() => (galleryImages[current].style.opacity = 1), 50);
+      }, 600);
+    }
+
+    setInterval(showNextImage, 3500);
+  } catch (err) {
+    console.error("Error loading images.json:", err);
+    imageGallery.textContent = "Error loading images.";
+  }
+});
 
 
 // -----------------------------
