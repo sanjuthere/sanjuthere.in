@@ -1,111 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>SANJUTHERE.IN — Precision CAE & FEA Engineering</title>
-
-  <link rel="stylesheet" href="css/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sanjeev There | Container Engineering & Fabrication</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <!-- Header / Banner -->
-  <header class="site-header">
-    <a class="brand" href="#home" aria-label="Home">
-      <img src="images/logo.png" alt="Sanjuthere Logo" class="brand-logo">
-      <img src="images/sanjuthere-metal.png" alt="Sanjuthere Text" class="brand-text">
-    </a>
-
-    <nav class="main-nav" aria-label="Main navigation">
+  <header class="header">
+    <div class="logo-banner">
+      <img src="images/logo.png" alt="Sanjuthere Logo" class="logo">
+      <img src="images/sanjuthere-banner.jpg" alt="Sanjuthere Metallic Banner" class="banner-img">
+    </div>
+    <nav class="navbar">
       <a href="#home">Home</a>
-      <a href="#about">About</a>
+      <a href="#services">Services</a>
       <a href="#portfolio">Portfolio</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
 
-  <main>
-    <!-- Hero / Intro -->
-    <section id="home" class="hero">
-      <div class="hero-inner">
-        <h1>SANJUTHERE.IN</h1>
-        <p class="subtitle">Advanced CAE & FEA Engineering — Simulation • Structural Analysis • Mechanical Design</p>
-        <p class="lead">We deliver engineering-grade simulation, finite element analysis, and realistic 3D visualizations to help manufacturers, designers and engineers make precise, data-driven decisions.</p>
-        <div class="hero-cta">
-          <a class="btn primary" href="#contact">Request a Quotation</a>
-          <a class="btn ghost" href="#portfolio">View Portfolio</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- 2-column: slideshow (left) + quote box (right) -->
-    <section id="portfolio" class="media-quote-section">
-      <div class="media-left">
-        <h2 class="section-title">Container Visuals & Project Gallery</h2>
-        <div id="slideshow" class="slideshow small" aria-live="polite"></div>
-        <p class="hint"></p>
-      </div>
-
-      <aside class="quote-right">
-        <h3 class="quote-title">Engineering Insights</h3>
-        <div id="quoteBox" class="quote-box" role="region" aria-label="Engineering quotes">
-          <!-- quotes inserted by JS -->
-        </div>
-        <div class="quote-controls">
-          <button id="prevQuote" class="small" aria-label="Previous quote">⟨ Prev</button>
-          <button id="nextQuote" class="small" aria-label="Next quote">Next ⟩</button>
-        </div>
-      </aside>
-    </section>
-
-    <!-- About / Services -->
-    <section id="about" class="about">
-      <h2 class="section-title centered">About Our Engineering Practice</h2>
-      <p class="about-text">
-        SANJUTHERE.IN offers professional CAE and FEA services focused on mechanical structures and container strength analysis. With 15+ years in IT and 4 years of specialized experience in engineering simulation, we combine software-driven workflows with practical mechanical understanding.
-      </p>
-
-      <div class="service-cards">
-        <article class="service">
-          <h4>FEA & Structural Analysis</h4>
-          <p>Linear and nonlinear static analysis, modal and dynamic response, fatigue estimation, and buckling checks for mechanical and structural components.</p>
-        </article>
-
-        <article class="service">
-          <h4>3D Modeling & Pre-processing</h4>
-          <p>Model cleanup, mesh strategy, boundary condition setup, and model preparation for accurate simulation results and quick iteration.</p>
-        </article>
-
-        <article class="service">
-          <h4>Post-processing & Reporting</h4>
-          <p>Interpretation of results, safety factors, optimization recommendations and professional reports with visuals for manufacturing or client review.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" class="contact">
-      <h2 class="section-title centered">Contact / Request a Simulation</h2>
-      <p class="lead centered">Please describe your project and expected deliverables. We respond with an initial proposal and timeline.</p>
-
-      <form class="contact-form" action="https://formspree.io/f/maylwjrb" method="POST">
-        <input type="text" name="name" placeholder="Your name" required>
-        <input type="email" name="email" placeholder="Your email" required>
-        <input type="text" name="company" placeholder="Company / Organization (optional)">
-        <textarea name="message" rows="5" placeholder="Briefly describe your project, model files you can share, and deadline." required></textarea>
-        <div class="form-row">
-          <button type="submit" class="btn primary">Send Request</button>
-          <a class="btn ghost" href="mailto:hello@sanjuthere.in">Email Directly</a>
-        </div>
-      </form>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div>© 2025 Sanjeev There. Engineering the Future with Precision Simulation.</div>
-      <div class="small">Hyderabad, India · Available worldwide</div>
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1>Engineering Excellence in Container Fabrication</h1>
+      <p>We specialize in designing and manufacturing high-quality shipping containers, custom vessels, and industrial enclosures — tailored to your needs with precision and durability.</p>
+      <a href="#contact" class="btn">Get in Touch</a>
     </div>
+  </section>
+
+  <section id="services" class="services">
+    <h2>Our Expertise</h2>
+    <div class="service-grid">
+      <div class="service-card">
+        <h3>Standard & High Cube Containers</h3>
+        <p>Manufacturing 20ft and 40ft standard or high-cube containers built with precision, strength, and ISO standards compliance.</p>
+      </div>
+      <div class="service-card">
+        <h3>Reefer Containers</h3>
+        <p>Temperature-controlled refrigerated containers designed for perishable goods and logistics solutions.</p>
+      </div>
+      <div class="service-card">
+        <h3>Custom Industrial Containers</h3>
+        <p>Specialized fabrication for industrial applications — chemical, mechanical, or process-oriented container systems.</p>
+      </div>
+      <div class="service-card">
+        <h3>Pressure Vessels & Cylindrical Tanks</h3>
+        <p>Custom-engineered pressure vessels and cylindrical storage tanks designed to meet stringent mechanical and safety standards.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="portfolio" class="portfolio">
+    <h2>Our Work</h2>
+    <div class="dual-section">
+      <div class="slider-box">
+        <div id="imageGallery" class="portfolio-grid">
+          <!-- Images auto-loaded by script.js -->
+        </div>
+      </div>
+      <div class="quote-box">
+        <p class="animated-quote">"Precision, strength, and design — the foundation of every container we build."</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <p>Get in touch for container fabrication, engineering design, or industrial projects. Let's build something solid together.</p>
+    <form action="https://formspree.io/f/maylwjrb" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+      <input type="submit" value="Send Message">
+    </form>
+  </section>
+
+  <footer class="footer">
+    <p>© 2025 Sanjeev There | Engineering • Containers • Fabrication</p>
   </footer>
 
   <script src="js/script.js"></script>
