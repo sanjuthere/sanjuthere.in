@@ -8,15 +8,21 @@
     const container = document.getElementById('slideshow');
     if (!container) return;
     try {
-      const res = await fetch(jsonPath);
+      // ⚙️ added for mobile — force no-cache, always get fresh data
+      const res = await fetch(`${jsonPath}?v=${Date.now()}`, { cache: "no-store" });
       const data = await res.json();
       const list = data.images || data;
+
+      container.innerHTML = ""; // clear if reloaded
       list.forEach((imgName, i) => {
         const img = document.createElement('img');
-        img.src = `images/${imgName}`;
+        // ⚙️ added timestamp to avoid cached stale images
+        img.src = `images/${imgName}?v=${Date.now()}`;
+        img.loading = "lazy"; // optimize for mobile
         if (i === 0) img.classList.add('active');
         container.appendChild(img);
       });
+
       const slides = container.querySelectorAll('img');
       let idx = 0;
       setInterval(() => {
