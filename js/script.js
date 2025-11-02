@@ -1,10 +1,12 @@
 (async function(){
+  // ---------- Config ----------
   const jsonPath = 'images/images.json';
   const slideshowId = 'slideshow';
   const quoteId = 'quoteBox';
   const slideIntervalMs = 3800;
   const quoteIntervalMs = 4200;
 
+  // Simple quotes (you can edit)
   const quotes = [
     "Automate everything — repeatable steps reduce mistakes.",
     "Infrastructure as code: treat your infra like software.",
@@ -14,19 +16,27 @@
     "Security and backups are not optional — they are guarantees."
   ];
 
+  // ---------- Helper to fetch images JSON ----------
   async function fetchImageList(path) {
     try {
-      // 🔧 mobile + GitHub cache fix
+      // ⭐️ Add cache-busting query parameter here:
       const resp = await fetch(`${path}?v=${Date.now()}`, { cache: "no-store" });
       if (!resp.ok) throw new Error('Not found');
       const list = await resp.json();
-      return list.filter(fn => /\.(jpe?g|png|webp|svg)$/i.test(fn));
+
+      // ⭐️ Handle both array or {images:[]} formats
+      const imageList = Array.isArray(list) ? list : list.images;
+      if (!imageList || !imageList.length) throw new Error("No images found");
+
+      // filter to jpg/png files only
+      return imageList.filter(fn => /\.(jpe?g|png|webp|svg)$/i.test(fn));
     } catch (err) {
       console.warn('Could not load images.json — falling back to manual list.', err);
       return [];
     }
   }
 
+  // ---------- Slideshow builder ----------
   function buildSlideshow(list){
     const container = document.getElementById(slideshowId);
     if (!container) return;
@@ -35,15 +45,17 @@
       container.innerHTML = '<div style="color:#cfeeea;padding:20px">No images listed in images/images.json</div>';
       return;
     }
+
     list.forEach((file, i) => {
       const img = document.createElement('img');
-      img.src = `images/${file}?v=${Date.now()}`;
+      img.src = `images/${file}`;
       img.alt = file;
       if (i===0) img.classList.add('active');
       container.appendChild(img);
       img.onerror = () => { img.style.display='none'; };
     });
 
+    // start cycling
     let idx = 0;
     const slides = container.querySelectorAll('img');
     if (slides.length <= 1) return;
@@ -54,6 +66,7 @@
     }, slideIntervalMs);
   }
 
+  // ---------- Quote box ----------
   function buildQuotes(){
     const qbox = document.getElementById(quoteId);
     if(!qbox) return;
@@ -77,20 +90,10 @@
       showQuote(qi);
     }, quoteIntervalMs);
 
-    const prev = document.getElementById('prevQuote');
-    const next = document.getElementById('nextQuote');
-    if(prev) prev.addEventListener('click', ()=> {
-      qi = (qi -1 + quotes.length) % quotes.length;
-      showQuote(qi);
-    });
-    if(next) next.addEventListener('click', ()=> {
-      qi = (qi +1) % quotes.length;
-      showQuote(qi);
-    });
-
     setTimeout(()=> p.classList.add('show'), 100);
   }
 
+  // ---------- Init ----------
   const images = await fetchImageList(jsonPath);
   buildSlideshow(images);
   buildQuotes();
