@@ -6,7 +6,7 @@
   <title>Sanjeev There | Container Engineering & Fabrication</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
+<body oncontextmenu="return false;">
   <header class="header">
     <div class="logo-banner">
       <img src="images/logo.png" alt="Sanjuthere Logo" class="logo" />
@@ -75,7 +75,20 @@
 
   <footer class="footer">
     <p>© 2025 Sanjeev There | Engineering • Containers • Fabrication</p>
+    <p style="font-size: 0.85rem; color: #ccc;">
+      Unauthorized copying or redistribution of content and images is strictly prohibited.
+    </p>
   </footer>
+
+  <!-- Security script -->
+  <script>
+    document.addEventListener('contextmenu', event => event.preventDefault());
+    document.addEventListener('keydown', event => {
+      if (event.ctrlKey && ['s','S','u','U','p','P'].includes(event.key)) event.preventDefault();
+      if (event.key === 'F12') event.preventDefault();
+    });
+    console.log("%cProtected by Sanjuthere.in © 2025", "color:#00bfb0;font-weight:bold;font-size:14px;");
+  </script>
 
   <script src="js/script.js"></script>
 </body>
