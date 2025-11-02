@@ -99,3 +99,10 @@
   buildQuotes();
 
 })();
+// Disable right-click and common save shortcuts
+document.addEventListener('contextmenu', event => event.preventDefault());
+document.addEventListener('keydown', event => {
+  if (event.ctrlKey && (event.key === 's' || event.key === 'u' || event.key === 'p')) {
+    event.preventDefault();
+  }
+});
