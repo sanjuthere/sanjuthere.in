@@ -1,64 +1,98 @@
-(async function () {
+(async function(){
   const jsonPath = 'images/images.json';
+  const slideshowId = 'slideshow';
+  const quoteId = 'quoteBox';
   const slideIntervalMs = 3800;
   const quoteIntervalMs = 4200;
 
-  // Load images and create slideshow
-  async function loadImages() {
-    const container = document.getElementById('slideshow');
-    if (!container) return;
+  const quotes = [
+    "Automate everything — repeatable steps reduce mistakes.",
+    "Infrastructure as code: treat your infra like software.",
+    "Small, consistent improvements beat occasional big rewrites.",
+    "Monitor first, optimize later — data drives decisions.",
+    "Ship small. Ship often. Learn faster.",
+    "Security and backups are not optional — they are guarantees."
+  ];
+
+  async function fetchImageList(path) {
     try {
-      // ⚙️ added for mobile — force no-cache, always get fresh data
-      const res = await fetch(`${jsonPath}?v=${Date.now()}`, { cache: "no-store" });
-      const data = await res.json();
-      const list = data.images || data;
-
-      container.innerHTML = ""; // clear if reloaded
-      list.forEach((imgName, i) => {
-        const img = document.createElement('img');
-        // ⚙️ added timestamp to avoid cached stale images
-        img.src = `images/${imgName}?v=${Date.now()}`;
-        img.loading = "lazy"; // optimize for mobile
-        if (i === 0) img.classList.add('active');
-        container.appendChild(img);
-      });
-
-      const slides = container.querySelectorAll('img');
-      let idx = 0;
-      setInterval(() => {
-        slides[idx].classList.remove('active');
-        idx = (idx + 1) % slides.length;
-        slides[idx].classList.add('active');
-      }, slideIntervalMs);
+      // 🔧 mobile + GitHub cache fix
+      const resp = await fetch(`${path}?v=${Date.now()}`, { cache: "no-store" });
+      if (!resp.ok) throw new Error('Not found');
+      const list = await resp.json();
+      return list.filter(fn => /\.(jpe?g|png|webp|svg)$/i.test(fn));
     } catch (err) {
-      console.error('Error loading images:', err);
+      console.warn('Could not load images.json — falling back to manual list.', err);
+      return [];
     }
   }
 
-  // Rotating quotes
-  const quotes = [
-    "Quality Containers. Reliable Engineering.",
-    "Innovation in Steel — Building the Future of Logistics.",
-    "Custom Fabrication for Every Industry Need.",
-    "Durability. Precision. Performance.",
-    "Delivering Strength in Every Container."
-  ];
+  function buildSlideshow(list){
+    const container = document.getElementById(slideshowId);
+    if (!container) return;
+    container.innerHTML = '';
+    if (!list.length){
+      container.innerHTML = '<div style="color:#cfeeea;padding:20px">No images listed in images/images.json</div>';
+      return;
+    }
+    list.forEach((file, i) => {
+      const img = document.createElement('img');
+      img.src = `images/${file}?v=${Date.now()}`;
+      img.alt = file;
+      if (i===0) img.classList.add('active');
+      container.appendChild(img);
+      img.onerror = () => { img.style.display='none'; };
+    });
 
-  function rotateQuotes() {
-    const quoteElement = document.querySelector('.animated-quote');
-    if (!quoteElement) return;
-    let quoteIndex = 0;
+    let idx = 0;
+    const slides = container.querySelectorAll('img');
+    if (slides.length <= 1) return;
     setInterval(() => {
-      quoteElement.style.opacity = "0";
-      setTimeout(() => {
-        quoteIndex = (quoteIndex + 1) % quotes.length;
-        quoteElement.textContent = quotes[quoteIndex];
-        quoteElement.style.opacity = "1";
-      }, 600);
-    }, quoteIntervalMs);
+      slides[idx].classList.remove('active');
+      idx = (idx + 1) % slides.length;
+      slides[idx].classList.add('active');
+    }, slideIntervalMs);
   }
 
-  // Initialize
-  await loadImages();
-  rotateQuotes();
+  function buildQuotes(){
+    const qbox = document.getElementById(quoteId);
+    if(!qbox) return;
+    qbox.innerHTML = '';
+    const p = document.createElement('div');
+    p.className = 'quote-text';
+    p.textContent = quotes[0];
+    qbox.appendChild(p);
+
+    let qi = 0;
+    function showQuote(i){
+      p.classList.remove('show');
+      setTimeout(()=> {
+        p.textContent = quotes[i];
+        p.classList.add('show');
+      }, 200);
+    }
+
+    setInterval(()=> {
+      qi = (qi+1) % quotes.length;
+      showQuote(qi);
+    }, quoteIntervalMs);
+
+    const prev = document.getElementById('prevQuote');
+    const next = document.getElementById('nextQuote');
+    if(prev) prev.addEventListener('click', ()=> {
+      qi = (qi -1 + quotes.length) % quotes.length;
+      showQuote(qi);
+    });
+    if(next) next.addEventListener('click', ()=> {
+      qi = (qi +1) % quotes.length;
+      showQuote(qi);
+    });
+
+    setTimeout(()=> p.classList.add('show'), 100);
+  }
+
+  const images = await fetchImageList(jsonPath);
+  buildSlideshow(images);
+  buildQuotes();
+
 })();
