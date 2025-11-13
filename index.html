@@ -3,159 +3,240 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sanjuthere - Engineering Excellence in Container Fabrication. Specialized in shipping containers, pressure vessels, and custom industrial containers.">
-    <meta name="keywords" content="container fabrication, shipping containers, pressure vessels, industrial containers, engineering">
-    <title>Sanjuthere | Engineering Excellence in Container Fabrication</title>
+    <meta name="description" content="We connect Indian farmers to the world through quality sourcing, packaging, and export of agricultural products such as moringa, makhana, lychee, mango, onion, rice, and vegetables.">
+    <meta name="keywords" content="agricultural export, farm procurement, Indian agriculture, global export, moringa, rice, mango export">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Sanjuthere Agro Exports – Agricultural Procurement & Global Export Services">
+    <meta property="og:description" content="Your Reliable Partner in Agricultural Procurement & Global Export. From farms to international markets.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1618987488789-91fb25bf66bc">
+    <meta property="og:type" content="website">
+    
+    <title>Sanjuthere Agro Exports – Agricultural Procurement & Global Export Services</title>
+    <link rel="icon" type="image/png" href="logo.png">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Header & Navigation -->
+    <!-- Language Toggle -->
+    <div class="language-toggle">
+        <button id="langToggle" class="lang-btn" aria-label="Toggle Language">
+            <span class="lang-icon">🌐</span>
+            <span id="currentLang">EN</span>
+        </button>
+    </div>
+
+    <!-- Header -->
     <header class="header">
-        <div class="container">
-            <div class="nav-wrapper">
-                <div class="logo">
-                    <h1>Sanjuthere</h1>
-                    <span class="logo-subtitle">Engineering Excellence</span>
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-content">
+                    <div class="logo-section">
+                        <img src="logo.png" alt="Sanjuthere Agro Exports Logo" class="logo" onerror="this.style.display='none'">
+                        <div class="brand">
+                            <h1 class="brand-name" data-en="Sanjuthere Agro Exports" data-hi="संजुथेरे एग्रो एक्सपोर्ट्स">Sanjuthere Agro Exports</h1>
+                            <p class="tagline" data-en="Harvesting Quality • Delivering Globally" data-hi="गुणवत्ता की कटाई • विश्व स्तर पर वितरण">Harvesting Quality • Delivering Globally</p>
+                        </div>
+                    </div>
+                    <ul class="nav-menu" id="navMenu">
+                        <li><a href="#home" data-en="Home" data-hi="होम">Home</a></li>
+                        <li><a href="#services" data-en="Services" data-hi="सेवाएं">Services</a></li>
+                        <li><a href="#gallery" data-en="Gallery" data-hi="गैलरी">Gallery</a></li>
+                        <li><a href="#products" data-en="Products" data-hi="उत्पाद">Products</a></li>
+                        <li><a href="#contact" data-en="Contact" data-hi="संपर्क">Contact</a></li>
+                    </ul>
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle Menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
                 </div>
-                <nav class="nav-links">
-                    <a href="#home" class="nav-link active">Home</a>
-                    <a href="#services" class="nav-link">Services</a>
-                    <a href="#portfolio" class="nav-link">Portfolio</a>
-                    <a href="#contact" class="nav-link">Contact</a>
-                </nav>
-                <button class="mobile-menu-toggle" aria-label="Toggle menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
             </div>
-        </div>
+        </nav>
     </header>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-overlay"></div>
-        <div class="container">
-            <div class="hero-content">
-                <h2 class="hero-title">Engineering Excellence in Container Fabrication.</h2>
-                <p class="hero-subtitle">We specialize in designing and manufacturing high-quality shipping containers, custom vessels, and industrial enclosures — tailored to your needs with precision and durability.</p>
-                <a href="#contact" class="btn btn-primary">Get in Touch</a>
+        <div class="hero-content">
+            <h2 class="hero-title" data-en="Your Reliable Partner in Agricultural Procurement & Global Export" data-hi="कृषि खरीद और वैश्विक निर्यात में आपका विश्वसनीय साथी">Your Reliable Partner in Agricultural Procurement & Global Export</h2>
+            <p class="hero-subtitle" data-en="We specialize in sourcing, processing, and delivering the finest agricultural products — from farms to international markets." data-hi="हम बेहतरीन कृषि उत्पादों की खरीद, प्रसंस्करण और वितरण में विशेषज्ञ हैं - खेतों से अंतर्राष्ट्रीय बाजारों तक।">We specialize in sourcing, processing, and delivering the finest agricultural products — from farms to international markets.</p>
+            <div class="hero-cta">
+                <a href="#contact" class="btn btn-primary" data-en="Send Inquiry" data-hi="पूछताछ भेजें">Send Inquiry</a>
+                <a href="https://wa.me/919876543210?text=Hello%20Sanjuthere%20Agro%20Exports%2C%20I%20would%20like%20to%20inquire%20about..." target="_blank" class="btn btn-whatsapp">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                    </svg>
+                    <span data-en="WhatsApp Inquiry" data-hi="व्हाट्सएप पूछताछ">WhatsApp Inquiry</span>
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Our Expertise Section -->
-    <section id="services" class="services">
+    <!-- Services Section -->
+    <section id="services" class="services section">
         <div class="container">
-            <h2 class="section-title">Our Expertise</h2>
+            <div class="section-header">
+                <h2 class="section-title" data-en="Our Services" data-hi="हमारी सेवाएं">Our Services</h2>
+                <p class="section-subtitle" data-en="Comprehensive agricultural solutions from farm to global market" data-hi="खेत से वैश्विक बाजार तक व्यापक कृषि समाधान">Comprehensive agricultural solutions from farm to global market</p>
+            </div>
             <div class="services-grid">
                 <div class="service-card">
-                    <div class="service-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="8" width="18" height="12" rx="2"/>
-                            <path d="M3 8V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2"/>
-                        </svg>
-                    </div>
-                    <h3 class="service-title">Standard & High Cube Containers</h3>
-                    <p class="service-description">20ft and 40ft containers built to ISO standards.</p>
+                    <div class="service-icon">🌾</div>
+                    <h3 class="service-title" data-en="Product Procurement & Sourcing" data-hi="उत्पाद खरीद और सोर्सिंग">Product Procurement & Sourcing</h3>
+                    <p class="service-description" data-en="Partnering directly with farmers for authentic, fresh produce. We ensure quality from the source." data-hi="प्रामाणिक, ताजा उपज के लिए किसानों के साथ सीधे साझेदारी। हम स्रोत से गुणवत्ता सुनिश्चित करते हैं।">Partnering directly with farmers for authentic, fresh produce. We ensure quality from the source.</p>
                 </div>
-
                 <div class="service-card">
-                    <div class="service-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17Z"/>
-                            <path d="m10 15 5-3-5-3z"/>
-                        </svg>
-                    </div>
-                    <h3 class="service-title">Reefer Containers</h3>
-                    <p class="service-description">Temperature-controlled containers for perishables.</p>
+                    <div class="service-icon">📦</div>
+                    <h3 class="service-title" data-en="Packaging & Quality Inspection" data-hi="पैकेजिंग और गुणवत्ता निरीक्षण">Packaging & Quality Inspection</h3>
+                    <p class="service-description" data-en="Ensuring export-grade handling and certified quality standards for global markets." data-hi="वैश्विक बाजारों के लिए निर्यात-ग्रेड हैंडलिंग और प्रमाणित गुणवत्ता मानकों को सुनिश्चित करना।">Ensuring export-grade handling and certified quality standards for global markets.</p>
                 </div>
-
                 <div class="service-card">
-                    <div class="service-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
-                            <circle cx="12" cy="12" r="3"/>
-                        </svg>
-                    </div>
-                    <h3 class="service-title">Custom Industrial Containers</h3>
-                    <p class="service-description">Fabrication for specialized industrial use.</p>
+                    <div class="service-icon">🚚</div>
+                    <h3 class="service-title" data-en="Domestic & International Logistics" data-hi="घरेलू और अंतर्राष्ट्रीय रसद">Domestic & International Logistics</h3>
+                    <p class="service-description" data-en="Smooth transport via sea, air, or road with real-time tracking and timely delivery." data-hi="समुद्र, हवाई या सड़क के माध्यम से रियल-टाइम ट्रैकिंग और समय पर डिलीवरी के साथ सुगम परिवहन।">Smooth transport via sea, air, or road with real-time tracking and timely delivery.</p>
                 </div>
-
                 <div class="service-card">
-                    <div class="service-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <ellipse cx="12" cy="5" rx="9" ry="3"/>
-                            <path d="M3 5v14a9 3 0 0 0 18 0V5"/>
-                        </svg>
-                    </div>
-                    <h3 class="service-title">Pressure Vessels & Cylindrical Tanks</h3>
-                    <p class="service-description">Custom-engineered vessels meeting safety standards.</p>
+                    <div class="service-icon">📋</div>
+                    <h3 class="service-title" data-en="Custom Orders & Export Documentation" data-hi="कस्टम ऑर्डर और निर्यात दस्तावेज़ीकरण">Custom Orders & Export Documentation</h3>
+                    <p class="service-description" data-en="Handling end-to-end compliance, certifications, and custom documentation for seamless exports." data-hi="निर्बाध निर्यात के लिए एंड-टू-एंड अनुपालन, प्रमाणीकरण और कस्टम दस्तावेज़ीकरण को संभालना।">Handling end-to-end compliance, certifications, and custom documentation for seamless exports.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio">
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery section">
         <div class="container">
-            <h2 class="section-title">Portfolio</h2>
-            <div class="portfolio-layout">
-                <div class="portfolio-left">
-                    <div class="slideshow-container">
-                        <div class="watermark">© Sanjuthere.in</div>
-                        <img id="slideshowImage" src="" alt="Container Fabrication Portfolio" class="slideshow-image">
-                        <button class="slide-control prev" aria-label="Previous slide">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="15 18 9 12 15 6"/>
-                            </svg>
-                        </button>
-                        <button class="slide-control next" aria-label="Next slide">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="9 18 15 12 9 6"/>
-                            </svg>
-                        </button>
+            <div class="section-header">
+                <h2 class="section-title" data-en="Our Operations" data-hi="हमारे संचालन">Our Operations</h2>
+                <p class="section-subtitle" data-en="From Indian soil to global shelves" data-hi="भारतीय धरती से वैश्विक बाजार तक">From Indian soil to global shelves</p>
+            </div>
+            <div class="gallery-content">
+                <div class="gallery-viewer">
+                    <div class="slideshow-container" id="slideshowContainer">
+                        <!-- Images loaded dynamically -->
                     </div>
+                    <button class="slide-nav prev" id="prevBtn" aria-label="Previous">❮</button>
+                    <button class="slide-nav next" id="nextBtn" aria-label="Next">❯</button>
+                    <div class="slide-dots" id="slideDots"></div>
                 </div>
-                <div class="portfolio-right">
-                    <div class="quote-box">
-                        <div class="quote-icon">"</div>
-                        <p id="rotatingQuote" class="quote-text"></p>
-                    </div>
+                <div class="quote-box">
+                    <div class="quote-icon">❝</div>
+                    <p class="quote-text" id="quoteText">From Indian soil to global shelves.</p>
+                    <div class="quote-animation"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-en="Our Product Catalog" data-hi="हमारी उत्पाद सूची">Our Product Catalog</h2>
+                <p class="section-subtitle" data-en="Premium agricultural products sourced from the finest farms" data-hi="सर्वोत्तम खेतों से प्राप्त प्रीमियम कृषि उत्पाद">Premium agricultural products sourced from the finest farms</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">🌿</div>
+                    <h3 class="product-name" data-en="Moringa" data-hi="मोरिंगा">Moringa</h3>
+                    <p class="product-desc" data-en="Organic moringa leaves and powder" data-hi="जैविक मोरिंगा पत्तियां और पाउडर">Organic moringa leaves and powder</p>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">🍚</div>
+                    <h3 class="product-name" data-en="Basmati Rice" data-hi="बासमती चावल">Basmati Rice</h3>
+                    <p class="product-desc" data-en="Premium long-grain basmati rice" data-hi="प्रीमियम लंबे दाने वाला बासमती चावल">Premium long-grain basmati rice</p>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">🥭</div>
+                    <h3 class="product-name" data-en="Fresh Mangoes" data-hi="ताजा आम">Fresh Mangoes</h3>
+                    <p class="product-desc" data-en="Alphonso and other varieties" data-hi="अल्फांसो और अन्य किस्में">Alphonso and other varieties</p>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">🧅</div>
+                    <h3 class="product-name" data-en="Red Onions" data-hi="लाल प्याज">Red Onions</h3>
+                    <p class="product-desc" data-en="Fresh red onions in bulk" data-hi="थोक में ताजा लाल प्याज">Fresh red onions in bulk</p>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">🫘</div>
+                    <h3 class="product-name" data-en="Makhana (Fox Nuts)" data-hi="मखाना">Makhana (Fox Nuts)</h3>
+                    <p class="product-desc" data-en="Premium quality fox nuts" data-hi="प्रीमियम गुणवत्ता मखाना">Premium quality fox nuts</p>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">🍇</div>
+                    <h3 class="product-name" data-en="Fresh Lychee" data-hi="ताजा लीची">Fresh Lychee</h3>
+                    <p class="product-desc" data-en="Seasonal fresh lychee" data-hi="मौसमी ताजा लीची">Seasonal fresh lychee</p>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">🥔</div>
+                    <h3 class="product-name" data-en="Vegetables" data-hi="सब्जियां">Vegetables</h3>
+                    <p class="product-desc" data-en="Seasonal fresh vegetables" data-hi="मौसमी ताजा सब्जियां">Seasonal fresh vegetables</p>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">🌾</div>
+                    <h3 class="product-name" data-en="Wheat & Grains" data-hi="गेहूं और अनाज">Wheat & Grains</h3>
+                    <p class="product-desc" data-en="Quality grains and pulses" data-hi="गुणवत्ता अनाज और दालें">Quality grains and pulses</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="contact">
+    <section id="contact" class="contact section">
         <div class="container">
-            <h2 class="section-title">Get in Touch</h2>
-            <p class="contact-intro">Have a fabrication or engineering project in mind? We'd love to hear from you. Send us a message and we'll get back to you as soon as possible.</p>
-            <form id="contactForm" class="contact-form" action="https://formspree.io/f/maylwjrb" method="POST">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Send Message</button>
-                <div id="formStatus" class="form-status"></div>
-            </form>
+            <div class="section-header">
+                <h2 class="section-title" data-en="Get In Touch" data-hi="संपर्क करें">Get In Touch</h2>
+                <p class="section-subtitle" data-en="For bulk orders or custom procurement requests, please include product details and destination." data-hi="थोक आदेश या कस्टम खरीद अनुरोधों के लिए, कृपया उत्पाद विवरण और गंतव्य शामिल करें।">For bulk orders or custom procurement requests, please include product details and destination.</p>
+            </div>
+            <div class="contact-content">
+                <form action="https://formspree.io/f/maylwjrb" method="POST" class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name" data-en="Your Name" data-hi="आपका नाम">Your Name</label>
+                        <input type="text" id="name" name="name" required placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" data-en="Your Email" data-hi="आपका ईमेल">Your Email</label>
+                        <input type="email" id="email" name="email" required placeholder="john@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="message" data-en="Your Message" data-hi="आपका संदेश">Your Message</label>
+                        <textarea id="message" name="message" rows="5" required placeholder="Tell us about your requirements..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" data-en="Send Message" data-hi="संदेश भेजें">Send Message</button>
+                </form>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p class="footer-copyright">Copyright © 2025 Sanjeev There</p>
-            <p class="footer-subtitle">Engineering • Containers • Fabrication</p>
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p data-en="© 2025 Sanjuthere Agro Exports | Procurement • Packaging • Export" data-hi="© 2025 संजुथेरे एग्रो एक्सपोर्ट्स | खरीद • पैकेजिंग • निर्यात">© 2025 Sanjuthere Agro Exports | Procurement • Packaging • Export</p>
+                </div>
+                <div class="footer-social">
+                    <a href="https://wa.me/919876543210" target="_blank" class="social-link" aria-label="WhatsApp">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                        </svg>
+                    </a>
+                    <a href="mailto:exports@sanjuthere.in" class="social-link" aria-label="Email">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" class="social-link" aria-label="LinkedIn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
         </div>
     </footer>
 
