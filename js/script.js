@@ -1,260 +1,271 @@
-// ========================================
-// Security & Protection
-// ========================================
+// Disable right-click context menu
+document.addEventListener('contextmenu', (e) => e.preventDefault());
 
-// Disable right-click
-document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-    return false;
-});
-
-// Disable specific keyboard shortcuts
-document.addEventListener('keydown', function(e) {
-    // Disable F12 (DevTools)
-    if (e.key === 'F12' || e.keyCode === 123) {
+// Disable keyboard shortcuts for saving and inspecting
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'F12' || 
+        (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+        (e.ctrlKey && e.shiftKey && e.key === 'C') ||
+        (e.ctrlKey && e.key === 's')) {
         e.preventDefault();
-        return false;
-    }
-    
-    // Disable Ctrl+S (Save)
-    if ((e.ctrlKey || e.metaKey) && e.key === 's') {
-        e.preventDefault();
-        return false;
-    }
-    
-    // Disable Ctrl+U (View Source)
-    if ((e.ctrlKey || e.metaKey) && e.key === 'u') {
-        e.preventDefault();
-        return false;
-    }
-    
-    // Disable Ctrl+Shift+I (DevTools)
-    if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'I') {
-        e.preventDefault();
-        return false;
-    }
-    
-    // Disable Ctrl+Shift+J (Console)
-    if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'J') {
-        e.preventDefault();
-        return false;
-    }
-    
-    // Disable Ctrl+Shift+C (Inspect Element)
-    if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'C') {
-        e.preventDefault();
-        return false;
     }
 });
 
-// Console message
-console.log('Protected by Sanjuthere.in © 2025');
+// ===== Language Toggle =====
+const langToggle = document.getElementById('langToggle');
+const currentLangSpan = document.getElementById('currentLang');
+let currentLang = 'en';
 
-// ========================================
-// Navigation
-// ========================================
-
-const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-const navLinks = document.querySelector('.nav-links');
-const navLinkItems = document.querySelectorAll('.nav-link');
-
-// Toggle mobile menu
-if (mobileMenuToggle) {
-    mobileMenuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-    });
-}
-
-// Close mobile menu when link is clicked
-navLinkItems.forEach(link => {
-    link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        
-        // Update active state
-        navLinkItems.forEach(item => item.classList.remove('active'));
-        link.classList.add('active');
-    });
+langToggle.addEventListener('click', () => {
+    currentLang = currentLang === 'en' ? 'hi' : 'en';
+    currentLangSpan.textContent = currentLang.toUpperCase();
+    translatePage(currentLang);
 });
 
-// ========================================
-// Slideshow
-// ========================================
-
-let images = [];
-let currentImageIndex = 0;
-const slideshowImage = document.getElementById('slideshowImage');
-const prevButton = document.querySelector('.slide-control.prev');
-const nextButton = document.querySelector('.slide-control.next');
-
-// Load images from JSON
-fetch('images/images.json')
-    .then(response => response.json())
-    .then(data => {
-        images = data.images;
-        if (images.length > 0) {
-            loadImage(0);
-            startSlideshow();
-        }
-    })
-    .catch(error => {
-        console.error('Error loading images:', error);
-    });
-
-function loadImage(index) {
-    if (images.length === 0) return;
-    
-    // Fade out
-    slideshowImage.classList.remove('active');
-    
-    // Wait for fade out, then change image
-    setTimeout(() => {
-        slideshowImage.src = images[index];
-        slideshowImage.alt = `Container Fabrication Portfolio - Image ${index + 1}`;
-        
-        // Fade in after image loads
-        slideshowImage.onload = () => {
-            slideshowImage.classList.add('active');
-        };
-    }, 400);
-    
-    currentImageIndex = index;
-}
-
-function nextSlide() {
-    const nextIndex = (currentImageIndex + 1) % images.length;
-    loadImage(nextIndex);
-}
-
-function prevSlide() {
-    const prevIndex = (currentImageIndex - 1 + images.length) % images.length;
-    loadImage(prevIndex);
-}
-
-// Manual controls
-if (nextButton) {
-    nextButton.addEventListener('click', () => {
-        nextSlide();
-        resetSlideshow();
-    });
-}
-
-if (prevButton) {
-    prevButton.addEventListener('click', () => {
-        prevSlide();
-        resetSlideshow();
-    });
-}
-
-// Auto slideshow
-let slideshowInterval;
-
-function startSlideshow() {
-    slideshowInterval = setInterval(nextSlide, 5000);
-}
-
-function resetSlideshow() {
-    clearInterval(slideshowInterval);
-    startSlideshow();
-}
-
-// ========================================
-// Rotating Quotes
-// ========================================
-
-const quotes = [
-    "Quality Containers. Reliable Engineering.",
-    "Innovation in Steel — Building the Future of Logistics.",
-    "Durability. Precision. Performance.",
-    "Engineered Solutions for Industrial Excellence.",
-    "Crafting Strength, Delivering Quality."
-];
-
-let currentQuoteIndex = 0;
-const quoteElement = document.getElementById('rotatingQuote');
-
-function loadQuote(index) {
-    // Fade out
-    quoteElement.classList.remove('active');
-    
-    // Wait for fade out, then change quote
-    setTimeout(() => {
-        quoteElement.textContent = quotes[index];
-        quoteElement.classList.add('active');
-    }, 300);
-    
-    currentQuoteIndex = index;
-}
-
-function nextQuote() {
-    const nextIndex = (currentQuoteIndex + 1) % quotes.length;
-    loadQuote(nextIndex);
-}
-
-// Initialize first quote
-if (quoteElement) {
-    loadQuote(0);
-    // Auto rotate quotes every 4 seconds
-    setInterval(nextQuote, 4000);
-}
-
-// ========================================
-// Contact Form
-// ========================================
-
-const contactForm = document.getElementById('contactForm');
-const formStatus = document.getElementById('formStatus');
-
-if (contactForm) {
-    contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const formData = new FormData(contactForm);
-        
-        try {
-            const response = await fetch(contactForm.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            });
-            
-            if (response.ok) {
-                formStatus.textContent = 'Thank you! Your message has been sent successfully.';
-                formStatus.className = 'form-status success';
-                contactForm.reset();
+function translatePage(lang) {
+    const elements = document.querySelectorAll('[data-en][data-hi]');
+    elements.forEach(el => {
+        const translation = el.getAttribute(`data-${lang}`);
+        if (translation) {
+            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                el.placeholder = translation;
             } else {
-                throw new Error('Form submission failed');
+                el.textContent = translation;
             }
-        } catch (error) {
-            formStatus.textContent = 'Oops! There was a problem submitting your form. Please try again.';
-            formStatus.className = 'form-status error';
         }
-        
-        // Hide status message after 5 seconds
-        setTimeout(() => {
-            formStatus.style.display = 'none';
-        }, 5000);
     });
 }
 
-// ========================================
-// Smooth Scroll Enhancement
-// ========================================
+// ===== Mobile Menu Toggle =====
+const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+const navMenu = document.getElementById('navMenu');
 
+mobileMenuToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    mobileMenuToggle.classList.toggle('active');
+});
+
+// Close mobile menu when clicking on a link
+document.querySelectorAll('.nav-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        mobileMenuToggle.classList.remove('active');
+    });
+});
+
+// ===== Smooth Scrolling =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
             const headerOffset = 80;
-            const elementPosition = target.offsetTop;
-            const offsetPosition = elementPosition - headerOffset;
-            
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
             window.scrollTo({
                 top: offsetPosition,
                 behavior: 'smooth'
             });
         }
     });
+});
+
+// ===== Image Slideshow =====
+let currentSlide = 0;
+let slides = [];
+let slideInterval;
+
+// Load images from JSON
+fetch('images/images.json')
+    .then(response => response.json())
+    .then(data => {
+        slides = data.images;
+        initSlideshow();
+    })
+    .catch(error => {
+        console.error('Error loading images:', error);
+        // Fallback images
+        slides = [
+            'https://images.unsplash.com/photo-1618987488789-91fb25bf66bc',
+            'https://images.unsplash.com/photo-1618987488793-78738e8f80d0',
+            'https://images.unsplash.com/photo-1755690092121-fac906e01c04',
+            'https://images.unsplash.com/photo-1709693298800-7e35fc0c8a2a',
+            'https://images.unsplash.com/photo-1739204618173-3e89def7140f',
+            'https://images.unsplash.com/photo-1681464084016-145257261809'
+        ];
+        initSlideshow();
+    });
+
+function initSlideshow() {
+    const container = document.getElementById('slideshowContainer');
+    const dotsContainer = document.getElementById('slideDots');
+    
+    // Create slides
+    slides.forEach((imgSrc, index) => {
+        const slideDiv = document.createElement('div');
+        slideDiv.className = 'slide';
+        if (index === 0) slideDiv.classList.add('active');
+        
+        const img = document.createElement('img');
+        img.src = imgSrc;
+        img.alt = `Agricultural operations ${index + 1}`;
+        img.loading = 'lazy';
+        
+        slideDiv.appendChild(img);
+        container.appendChild(slideDiv);
+        
+        // Create dot
+        const dot = document.createElement('span');
+        dot.className = 'dot';
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(index));
+        dotsContainer.appendChild(dot);
+    });
+    
+    // Start auto-play
+    startSlideshow();
+}
+
+function showSlide(n) {
+    const slideElements = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    
+    if (n >= slideElements.length) currentSlide = 0;
+    if (n < 0) currentSlide = slideElements.length - 1;
+    
+    slideElements.forEach(slide => slide.classList.remove('active'));
+    dots.forEach(dot => dot.classList.remove('active'));
+    
+    slideElements[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+}
+
+function nextSlide() {
+    currentSlide++;
+    showSlide(currentSlide);
+}
+
+function prevSlide() {
+    currentSlide--;
+    showSlide(currentSlide);
+}
+
+function goToSlide(n) {
+    currentSlide = n;
+    showSlide(currentSlide);
+    resetSlideshow();
+}
+
+function startSlideshow() {
+    slideInterval = setInterval(nextSlide, 5000);
+}
+
+function resetSlideshow() {
+    clearInterval(slideInterval);
+    startSlideshow();
+}
+
+// Navigation buttons
+document.getElementById('prevBtn').addEventListener('click', () => {
+    prevSlide();
+    resetSlideshow();
+});
+
+document.getElementById('nextBtn').addEventListener('click', () => {
+    nextSlide();
+    resetSlideshow();
+});
+
+// ===== Animated Quotes =====
+const quotes = [
+    { en: "From Indian soil to global shelves.", hi: "भारतीय धरती से वैश्विक बाजार तक।" },
+    { en: "Every grain tells a story of care.", hi: "हर अनाज देखभाल की कहानी बताता है।" },
+    { en: "Quality harvested with integrity.", hi: "ईमानदारी के साथ कटाई की गई गुणवत्ता।" },
+    { en: "Connecting farmers to the world.", hi: "किसानों को दुनिया से जोड़ना।" },
+    { en: "Sustainably sourced, globally delivered.", hi: "स्थायी रूप से प्राप्त, विश्व स्तर पर वितरित।" }
+];
+
+let currentQuote = 0;
+const quoteText = document.getElementById('quoteText');
+
+function changeQuote() {
+    quoteText.style.opacity = '0';
+    quoteText.style.transform = 'translateY(10px)';
+    
+    setTimeout(() => {
+        currentQuote = (currentQuote + 1) % quotes.length;
+        quoteText.textContent = quotes[currentQuote][currentLang];
+        quoteText.style.opacity = '1';
+        quoteText.style.transform = 'translateY(0)';
+    }, 500);
+}
+
+// Initialize quote
+quoteText.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+quoteText.textContent = quotes[0].en;
+
+// Change quote every 5 seconds
+setInterval(changeQuote, 5000);
+
+// Update quotes when language changes
+function updateQuoteLanguage(lang) {
+    quoteText.textContent = quotes[currentQuote][lang];
+}
+
+// Override translatePage to include quote translation
+const originalTranslatePage = translatePage;
+translatePage = function(lang) {
+    originalTranslatePage(lang);
+    updateQuoteLanguage(lang);
+};
+
+// ===== Form Handling =====
+const contactForm = document.getElementById('contactForm');
+contactForm.addEventListener('submit', (e) => {
+    // Form will submit to Formspree naturally
+    // Add visual feedback
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = currentLang === 'en' ? 'Sending...' : 'भेज रहे हैं...';
+    submitBtn.disabled = true;
+    
+    // Re-enable after 3 seconds (Formspree will handle actual submission)
+    setTimeout(() => {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    }, 3000);
+});
+
+// ===== Scroll Animations =====
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, observerOptions);
+
+// Observe sections for scroll animations
+document.querySelectorAll('.service-card, .product-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+});
+
+// ===== Parallax Effect for Hero =====
+window.addEventListener('scroll', () => {
+    const hero = document.querySelector('.hero');
+    const scrolled = window.pageYOffset;
+    if (hero) {
+        hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+    }
 });
