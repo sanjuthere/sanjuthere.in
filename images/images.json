@@ -1,27 +1,58 @@
 {
-  "farming": [
-    "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=1200&q=80",
-    "https://images.unsplash.com/photo-1600336754162-dc8d9c46a0d9?w=1200&q=80",
-    "https://images.unsplash.com/photo-1591073113125-e46713c829ed?w=1200&q=80",
-    "https://images.unsplash.com/photo-1598454442384-0684e75be91a?w=1200&q=80"
-  ],
-  "fruits": [
-    "https://images.unsplash.com/photo-1524594154908-eddff3a82f9e?w=1200&q=80",
-    "https://images.unsplash.com/photo-1464965911861-746a04b4bca9?w=1200&q=80",
-    "https://images.unsplash.com/photo-1514516345957-5565695c1b2e?w=1200&q=80"
-  ],
-  "vegetables": [
-    "https://images.unsplash.com/photo-1506806732259-39c2d0268443?w=1200&q=80",
-    "https://images.unsplash.com/photo-1437750769460-0abd4e59d560?w=1200&q=80",
-    "https://images.unsplash.com/photo-1505253716362-afaea1f043b2?w=1200&q=80"
-  ],
-  "spices": [
-    "https://images.unsplash.com/photo-1603048523898-593a102d01d1?w=1200&q=80",
-    "https://images.unsplash.com/photo-1606813902915-6f0d7d4d2b8a?w=1200&q=80"
-  ],
-  "mandi": [
-    "https://images.unsplash.com/photo-1598554747436-d0a36a83c7d0?w=1200&q=80",
-    "https://images.unsplash.com/photo-1502364141068-e26d9cf01db1?w=1200&q=80"
-  ]
+  "categories": {
+    "farming": [
+      "images/agro/agroimage1.jpg",
+      "images/agro/agroimage2.jpg",
+      "images/agro/agroimage3.jpg",
+      "images/agro/agroimage4.jpg",
+      "images/agro/agroimage5.jpg",
+      "images/agro/agroimage6.jpg",
+      "images/agro/agroimage7.jpg",
+      "images/agro/agroimage8.jpg",
+      "images/agro/hortiimage1.jpg",
+      "images/agro/hortiimage2.jpg",
+      "images/agro/hortiimage3.jpg"
+    ],
+    "fruits": [
+      "images/agro/fruitimage1.jpg",
+      "images/agro/fruitimage2.jpg",
+      "images/agro/fruitimage3.jpg",
+      "images/agro/fruitimage4.jpg",
+      "images/agro/fruitimage5.jpg",
+      "images/agro/fruitimage6.jpg",
+      "images/agro/fruitimage7.jpg",
+      "images/agro/fruitimage8.jpg",
+      "images/agro/fruitimage9.jpg",
+      "images/agro/fruitimage10.jpg",
+      "images/agro/fruitimage11.jpg",
+      "images/agro/fruitimage12.jpg"
+    ],
+    "vegetables": [
+      "images/agro/vegimage1.jpg",
+      "images/agro/vegimage2.jpg",
+      "images/agro/vegimage3.jpg",
+      "images/agro/vegimage4.jpg",
+      "images/agro/vegimage5.jpg",
+      "images/agro/vegimage6.jpg",
+      "images/agro/vegimage7.jpg",
+      "images/agro/vegimage8.jpg",
+      "images/agro/vegimage9.jpg",
+      "images/agro/vegimage10.jpg"
+    ],
+    "spices": [
+      "images/agro/spices1.jpg",
+      "images/agro/spices2.jpg",
+      "images/agro/spices3.jpg",
+      "images/agro/spices4.jpg",
+      "images/agro/spices5.jpg",
+      "images/agro/spices6.jpg",
+      "images/agro/spices7.jpg",
+      "images/agro/spices8.jpg",
+      "images/agro/packageingimage1.jpg",
+      "images/agro/packageingimage2.jpg",
+      "images/agro/packageingimage3.jpg",
+      "images/agro/packageingimage4.jpg",
+      "images/agro/packageingimage5.jpg"
+    ]
+  }
 }
-
