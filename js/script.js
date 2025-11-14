@@ -1,271 +1,206 @@
-// Disable right-click context menu
-document.addEventListener('contextmenu', (e) => e.preventDefault());
+/* script.js — category gallery + i18n + hidden whatsapp */
+(function(){
+  "use strict";
 
-// Disable keyboard shortcuts for saving and inspecting
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'F12' || 
-        (e.ctrlKey && e.shiftKey && e.key === 'I') ||
-        (e.ctrlKey && e.shiftKey && e.key === 'C') ||
-        (e.ctrlKey && e.key === 's')) {
-        e.preventDefault();
+  /* ---------- Config ---------- */
+  const imagesJsonPath = 'images/images.json'; // category-wise JSON
+  const defaultLang = 'en';
+  let currentLang = defaultLang;
+  const categoriesOrder = ['farming','fruits','vegetables','spices','mandi'];
+
+  /* ---------- Simple multilingual content (you can expand) ---------- */
+  const LANG = {
+    en: {
+      brandName: "Sanjuthere Agro Exports",
+      tagline: "Harvesting Quality • Delivering Globally",
+      navHome: "Home", navServices: "Services", navGallery: "Gallery", navProducts: "Products", navContact: "Contact",
+      heroTitle: "Your Reliable Partner in Agricultural Procurement & Global Export",
+      heroSubtitle: "We specialize in sourcing, processing, and delivering the finest agricultural products — from farms to international markets.",
+      ctaInquiry: "Send Inquiry", ctaWhatsapp: "WhatsApp Inquiry",
+      galleryTitle: "Our Operations", gallerySubtitle: "From Indian soil to global shelves",
+      contactTitle: "Get In Touch", contactSubtitle: "For bulk orders or custom procurement requests, please include product details and destination.",
+      sendMessage: "Send Message",
+      footerText: "© 2025 Sanjuthere Agro Exports | Procurement • Packaging • Export"
+    },
+    hi: { brandName:"संजुथेरे एग्रो एक्सपोर्ट्स", tagline:"गुणवत्ता की कटाई • विश्व स्तर पर वितरण", navHome:"होम",navServices:"सेवाएं",navGallery:"गैलरी",navProducts:"उत्पाद",navContact:"संपर्क",
+      heroTitle:"कृषि खरीद और वैश्विक निर्यात में आपका विश्वसनीय साथी", heroSubtitle:"हम बेहतरीन कृषि उत्पादों की खरीद, प्रसंस्करण और वितरण में विशेषज्ञ हैं - खेतों से अंतर्राष्ट्रीय बाजारों तक।",
+      ctaInquiry:"पूछताछ भेजें", ctaWhatsapp:"व्हाट्सएप पूछताछ", galleryTitle:"हमारे संचालन", gallerySubtitle:"भारतीय धरती से वैश्विक बाजार तक", contactTitle:"संपर्क करें", contactSubtitle:"थोक आदेश या कस्टम खरीद अनुरोधों के लिए, कृपया उत्पाद विवरण और गंतव्य शामिल करें।", sendMessage:"संदेश भेजें", footerText:"© 2025 संजुथेरे एग्रो एक्सपोर्ट्स | खरीद • पैकेजिंग • निर्यात"
+    },
+    ar: { brandName:"سانجوثير للصادرات الزراعية", tagline:"الحصاد بالجودة • التوصيل عالمياً", navHome:"الرئيسية",navServices:"الخدمات",navGallery:"المعرض",navProducts:"المنتجات",navContact:"اتصل بنا",
+      heroTitle:"شريكك الموثوق في شراء وتصدير المنتجات الزراعية", heroSubtitle:"نحن متخصصون في التوريد والتعبئة والتوصيل للأسواق العالمية.", ctaInquiry:"أرسل استفسار", ctaWhatsapp:"استفسار واتساب", galleryTitle:"عملياتنا", gallerySubtitle:"من التربة الهندية إلى الأسواق العالمية", contactTitle:"تواصل معنا", contactSubtitle:"لطلبات الجملة أو طلبات التوريد المخصصة، يرجى تضمين تفاصيل المنتج والوجهة.", sendMessage:"إرسال", footerText:"© 2025 سانجوثير للصادرات الزراعية | شراء • تعبئة • تصدير"
+    },
+    fr: { brandName:"Sanjuthere Agro Exports", tagline:"Récolter la qualité • Livrer mondialement", navHome:"Accueil",navServices:"Services",navGallery:"Galerie",navProducts:"Produits",navContact:"Contact",
+      heroTitle:"Votre partenaire fiable en approvisionnement agricole et export", heroSubtitle:"Nous sommes spécialisés dans l'approvisionnement, la transformation et la livraison des meilleurs produits agricoles.",
+      ctaInquiry:"Envoyer une demande", ctaWhatsapp:"Demande WhatsApp", galleryTitle:"Nos opérations", gallerySubtitle:"Du sol indien aux rayons mondiaux", contactTitle:"Contactez-nous", contactSubtitle:"Pour commandes en gros ou demandes personnalisées, inclure détails et destination.", sendMessage:"Envoyer", footerText:"© 2025 Sanjuthere Agro Exports | Approvisionnement • Emballage • Export"
+    },
+    ne: { brandName:"Sanjuthere Agro Exports", tagline:"गुणस्तरको पैदावार • विश्वव्यापी वितरण", navHome:"गृहपृष्ठ",navServices:"सेवाहरू",navGallery:"ग्यालरी",navProducts:"उत्पादन",navContact:"सम्पर्क",
+      heroTitle:"कृषि खरिद र विश्वव्यापी निर्यातमा तपाईंको भरपर्दो साझेदार", heroSubtitle:"हामी फार्महरूबाट अन्तर्राष्ट्रिय बजारसम्म उत्कृष्ट कृषि उत्पादनहरू ख़रीद, प्रशोधन र वितरणमा विशेषज्ञ छौं।", ctaInquiry:"अनुरोध पठाउनुहोस्", ctaWhatsapp:"व्हाट्सएप अनुरोध", galleryTitle:"हाम्रो सञ्चालन", gallerySubtitle:"भारतीय माटोबाट विश्वव्यापी शेल्फसम्म", contactTitle:"सम्पर्क गर्नुहोस्", contactSubtitle:"थोक अर्डर वा कस्टम खरिद अनुरोधको लागि, उत्पादन विवरण र गन्तव्य समावेश गर्नुहोस्।", sendMessage:"पठाउनुहोस्", footerText:"© 2025 Sanjuthere Agro Exports | खरिद • प्याकेजिङ • निर्यात"
+    },
+    ur: { brandName:"Sanjuthere Agro Exports", tagline:"معیار کی کٹائی • عالمی سطح پر ترسیل", navHome:"ہوم",navServices:"خدمات",navGallery:"گیلری",navProducts:"مصنوعات",navContact:"رابطہ",
+      heroTitle:"زرعی خریداری اور عالمی برآمدات میں آپ کا قابل اعتماد پارٹنر", heroSubtitle:"ہم فارمز سے بین الاقوامی مارکیٹ تک بہترین زرعی مصنوعات کی خرید، پروسس اور ڈیلیور کرنے میں ماہر ہیں۔", ctaInquiry:"استفسار بھیجیں", ctaWhatsapp:"واٹس ایپ استفسار", galleryTitle:"ہماری کارروائیاں", gallerySubtitle:"بھارتی مٹی سے عالمی شیلف تک", contactTitle:"ہم سے رابطہ کریں", contactSubtitle:"بلک آرڈرز یا کسٹم پروکیورمنٹ کی درخواستوں کے لیے، براہِ کرم پروڈکٹ کی تفصیلات اور منزل شامل کریں۔", sendMessage:"پیغام بھیجیں", footerText:"© 2025 Sanjuthere Agro Exports | خرید • پیکیجنگ • ایکسپورٹ"
+    },
+    bn: { brandName:"Sanjuthere Agro Exports", tagline:"গুণগত ফলন • বিশ্বব্যাপী ডেলিভারি", navHome:"হোম",navServices:"সেবা",navGallery:"গ্যালারি",navProducts:"পণ্য",navContact:"কনট্যাক্ট",
+      heroTitle:"কৃষি সংগ্রহ এবং বিশ্ববাজারে রপ্তানির আপনার নির্ভরযোগ্য অংশীদার", heroSubtitle:"আমরা খামার থেকে আন্তর্জাতিক বাজার পর্যন্ত শ্রেষ্ঠ কৃষি পণ্য সংগ্রহ, প্রক্রিয়াকরণ ও সরবরাহে বিশেষজ্ঞ।", ctaInquiry:"অনুরোধ পাঠান", ctaWhatsapp:"হোয়াটসঅ্যাপ অনুরোধ", galleryTitle:"আমাদের কার্যক্রম", gallerySubtitle:"ভারতীয় মাটি থেকে বৈশ্বিক তাক পর্যন্ত", contactTitle:"যোগাযোগ করুন", contactSubtitle:"বাল্ক অর্ডার বা কাস্টম চাহিদার জন্য পণ্য বিবরণ ও গন্তব্য দিন।", sendMessage:"পাঠান", footerText:"© 2025 Sanjuthere Agro Exports | প্রোকিউরমেন্ট • প্যাকেজিং • রপ্তানি"
     }
-});
+  };
 
-// ===== Language Toggle =====
-const langToggle = document.getElementById('langToggle');
-const currentLangSpan = document.getElementById('currentLang');
-let currentLang = 'en';
+  /* ---------- Quotes for quote-box (multi-language) ---------- */
+  const QUOTES = {
+    en:["From Indian soil to global shelves.","Every grain tells a story of care.","Quality harvested with integrity.","Connecting farmers to the world.","Sustainably sourced, globally delivered."],
+    hi:["भारतीय धरती से वैश्विक बाजार तक।","हर अनाज देखभाल की कहानी बताता है।","ईमानदारी के साथ कटाई की गई गुणवत्ता।","किसानों को दुनिया से जोड़ना।","स्थायी रूप से प्राप्त, विश्व स्तर पर वितरित।"],
+    ar:["من التربة الهندية إلى الرفوف العالمية.","كل حبة تحكي قصة رعاية.","جودة تم حصادها بنزاهة.","ربط المزارعين بالعالم.","مصدر مستدام، تسليم عالمي."],
+    fr:["Du sol indien aux rayons mondiaux.","Chaque grain raconte une histoire de soin.","Qualité récoltée avec intégrité.","Connecter les agriculteurs au monde.","Source durable, livraison mondiale."],
+    ne:["भारतीय माटोबाट विश्वव्यापी शेल्फसम्म।","हरेक दाना हेरचाहको कथा भन्छ।","सत्यनिष्ठासँग उठाइएको गुणस्तर।","किसानहरुलाई संसारसँग जोड्दै।","स्थायी रुपमा स्रोत, विश्वव्यापी वितरण।"],
+    ur:["بھارتی مٹی سے عالمی شیلف تک۔","ہر دانہ دیکھ بھال کی کہانی بتاتا ہے۔","ایمانداری کے ساتھ فصل کی صاف معیار۔","زرعیوں کو دنیا سے جوڑنا۔","پائیدار طور پر حاصل شدہ، عالمی سطح پر فراہم۔"],
+    bn:["ভারতীয় মাটি থেকে বৈশ্বিক তাক পর্যন্ত।","প্রতিটি শস্য যত্নের গল্প বলে।","নিষ্ঠার সাথে সংগ্রহিত মান।","কৃষকদের বিশ্বের সাথে সংযুক্ত করা।","টেকসইভাবে প্রাপ্ত, বিশ্বব্যাপী বিতরণ।"]
+  };
 
-langToggle.addEventListener('click', () => {
-    currentLang = currentLang === 'en' ? 'hi' : 'en';
-    currentLangSpan.textContent = currentLang.toUpperCase();
-    translatePage(currentLang);
-});
-
-function translatePage(lang) {
-    const elements = document.querySelectorAll('[data-en][data-hi]');
-    elements.forEach(el => {
-        const translation = el.getAttribute(`data-${lang}`);
-        if (translation) {
-            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                el.placeholder = translation;
-            } else {
-                el.textContent = translation;
-            }
-        }
+  /* ---------- Utils: translate page by LANG object ---------- */
+  function applyLang(lang){
+    currentLang = lang;
+    document.getElementById('currentLang').textContent = lang.toUpperCase();
+    // static keys: data-key attributes
+    document.querySelectorAll('[data-key]').forEach(el=>{
+      const k = el.getAttribute('data-key');
+      if(LANG[lang] && LANG[lang][k]) {
+        el.textContent = LANG[lang][k];
+      }
     });
-}
+    // update quote text now
+    const qEl = document.getElementById('quoteText');
+    if(qEl) qEl.textContent = (QUOTES[lang] && QUOTES[lang][0])||QUOTES['en'][0];
+  }
 
-// ===== Mobile Menu Toggle =====
-const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-const navMenu = document.getElementById('navMenu');
-
-mobileMenuToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    mobileMenuToggle.classList.toggle('active');
-});
-
-// Close mobile menu when clicking on a link
-document.querySelectorAll('.nav-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        mobileMenuToggle.classList.remove('active');
+  // language toggle UI
+  const langToggle = document.getElementById('langToggle');
+  if(langToggle){
+    langToggle.addEventListener('click',()=>{
+      // rotate languages list
+      const list = Object.keys(LANG);
+      let idx = list.indexOf(currentLang);
+      idx = (idx+1)%list.length;
+      applyLang(list[idx]);
     });
-});
+  }
 
-// ===== Smooth Scrolling =====
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-            const headerOffset = 80;
-            const elementPosition = targetElement.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
-        }
-    });
-});
+  /* ---------- Mobile menu toggle ---------- */
+  const mobBtn = document.getElementById('mobileMenuToggle');
+  const navMenu = document.getElementById('navMenu');
+  if(mobBtn && navMenu){
+    mobBtn.addEventListener('click',()=>{ navMenu.classList.toggle('active'); mobBtn.classList.toggle('active'); })
+  }
 
-// ===== Image Slideshow =====
-let currentSlide = 0;
-let slides = [];
-let slideInterval;
-
-// Load images from JSON
-fetch('images/images.json')
-    .then(response => response.json())
-    .then(data => {
-        slides = data.images;
-        initSlideshow();
-    })
-    .catch(error => {
-        console.error('Error loading images:', error);
-        // Fallback images
-        slides = [
-            'https://images.unsplash.com/photo-1618987488789-91fb25bf66bc',
-            'https://images.unsplash.com/photo-1618987488793-78738e8f80d0',
-            'https://images.unsplash.com/photo-1755690092121-fac906e01c04',
-            'https://images.unsplash.com/photo-1709693298800-7e35fc0c8a2a',
-            'https://images.unsplash.com/photo-1739204618173-3e89def7140f',
-            'https://images.unsplash.com/photo-1681464084016-145257261809'
-        ];
-        initSlideshow();
-    });
-
-function initSlideshow() {
-    const container = document.getElementById('slideshowContainer');
-    const dotsContainer = document.getElementById('slideDots');
-    
-    // Create slides
-    slides.forEach((imgSrc, index) => {
-        const slideDiv = document.createElement('div');
-        slideDiv.className = 'slide';
-        if (index === 0) slideDiv.classList.add('active');
-        
-        const img = document.createElement('img');
-        img.src = imgSrc;
-        img.alt = `Agricultural operations ${index + 1}`;
-        img.loading = 'lazy';
-        
-        slideDiv.appendChild(img);
-        container.appendChild(slideDiv);
-        
-        // Create dot
-        const dot = document.createElement('span');
-        dot.className = 'dot';
-        if (index === 0) dot.classList.add('active');
-        dot.addEventListener('click', () => goToSlide(index));
-        dotsContainer.appendChild(dot);
-    });
-    
-    // Start auto-play
-    startSlideshow();
-}
-
-function showSlide(n) {
-    const slideElements = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.dot');
-    
-    if (n >= slideElements.length) currentSlide = 0;
-    if (n < 0) currentSlide = slideElements.length - 1;
-    
-    slideElements.forEach(slide => slide.classList.remove('active'));
-    dots.forEach(dot => dot.classList.remove('active'));
-    
-    slideElements[currentSlide].classList.add('active');
-    dots[currentSlide].classList.add('active');
-}
-
-function nextSlide() {
-    currentSlide++;
-    showSlide(currentSlide);
-}
-
-function prevSlide() {
-    currentSlide--;
-    showSlide(currentSlide);
-}
-
-function goToSlide(n) {
-    currentSlide = n;
-    showSlide(currentSlide);
-    resetSlideshow();
-}
-
-function startSlideshow() {
-    slideInterval = setInterval(nextSlide, 5000);
-}
-
-function resetSlideshow() {
-    clearInterval(slideInterval);
-    startSlideshow();
-}
-
-// Navigation buttons
-document.getElementById('prevBtn').addEventListener('click', () => {
-    prevSlide();
-    resetSlideshow();
-});
-
-document.getElementById('nextBtn').addEventListener('click', () => {
-    nextSlide();
-    resetSlideshow();
-});
-
-// ===== Animated Quotes =====
-const quotes = [
-    { en: "From Indian soil to global shelves.", hi: "भारतीय धरती से वैश्विक बाजार तक।" },
-    { en: "Every grain tells a story of care.", hi: "हर अनाज देखभाल की कहानी बताता है।" },
-    { en: "Quality harvested with integrity.", hi: "ईमानदारी के साथ कटाई की गई गुणवत्ता।" },
-    { en: "Connecting farmers to the world.", hi: "किसानों को दुनिया से जोड़ना।" },
-    { en: "Sustainably sourced, globally delivered.", hi: "स्थायी रूप से प्राप्त, विश्व स्तर पर वितरित।" }
-];
-
-let currentQuote = 0;
-const quoteText = document.getElementById('quoteText');
-
-function changeQuote() {
-    quoteText.style.opacity = '0';
-    quoteText.style.transform = 'translateY(10px)';
-    
-    setTimeout(() => {
-        currentQuote = (currentQuote + 1) % quotes.length;
-        quoteText.textContent = quotes[currentQuote][currentLang];
-        quoteText.style.opacity = '1';
-        quoteText.style.transform = 'translateY(0)';
-    }, 500);
-}
-
-// Initialize quote
-quoteText.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-quoteText.textContent = quotes[0].en;
-
-// Change quote every 5 seconds
-setInterval(changeQuote, 5000);
-
-// Update quotes when language changes
-function updateQuoteLanguage(lang) {
-    quoteText.textContent = quotes[currentQuote][lang];
-}
-
-// Override translatePage to include quote translation
-const originalTranslatePage = translatePage;
-translatePage = function(lang) {
-    originalTranslatePage(lang);
-    updateQuoteLanguage(lang);
-};
-
-// ===== Form Handling =====
-const contactForm = document.getElementById('contactForm');
-contactForm.addEventListener('submit', (e) => {
-    // Form will submit to Formspree naturally
-    // Add visual feedback
-    const submitBtn = contactForm.querySelector('button[type="submit"]');
-    const originalText = submitBtn.textContent;
-    submitBtn.textContent = currentLang === 'en' ? 'Sending...' : 'भेज रहे हैं...';
-    submitBtn.disabled = true;
-    
-    // Re-enable after 3 seconds (Formspree will handle actual submission)
-    setTimeout(() => {
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-    }, 3000);
-});
-
-// ===== Scroll Animations =====
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, observerOptions);
-
-// Observe sections for scroll animations
-document.querySelectorAll('.service-card, .product-card').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(el);
-});
-
-// ===== Parallax Effect for Hero =====
-window.addEventListener('scroll', () => {
-    const hero = document.querySelector('.hero');
-    const scrolled = window.pageYOffset;
-    if (hero) {
-        hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+  /* ---------- Fetch category JSON and build gallery ---------- */
+  async function fetchCategories(){
+    try{
+      const r = await fetch(imagesJsonPath,{cache:"no-cache"});
+      if(!r.ok) throw new Error('no json');
+      const data = await r.json();
+      return data;
+    }catch(e){
+      console.warn('images JSON load failed, using fallback',e);
+      return null;
     }
-});
+  }
+
+  function buildCategoryControls(data){
+    const ctl = document.getElementById('categoryControls');
+    if(!ctl) return;
+    ctl.innerHTML = '';
+    const cats = Object.keys(data).filter(c=>data[c] && data[c].length);
+    // ensure desired order
+    const order = categoriesOrder.filter(c=>cats.includes(c)).concat(cats.filter(c=>!categoriesOrder.includes(c)));
+    order.forEach((c,i)=>{
+      const btn = document.createElement('button');
+      btn.className = 'category-btn'+(i===0?' active':'');
+      btn.textContent = c.charAt(0).toUpperCase()+c.slice(1);
+      btn.dataset.cat = c;
+      btn.addEventListener('click',()=> {
+        document.querySelectorAll('.category-btn').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        populateGallery(data[c]);
+      });
+      ctl.appendChild(btn);
+    });
+    // default populate first
+    if(order[0]) populateGallery(data[order[0]]);
+  }
+
+  function populateGallery(list){
+    const grid = document.getElementById('galleryGrid'); if(!grid) return;
+    grid.innerHTML=''; if(!list || !list.length){ grid.innerHTML='<div style="padding:20px">No images</div>'; return; }
+    list.forEach((src,idx)=>{
+      const item = document.createElement('div'); item.className='gallery-item';
+      const img = document.createElement('img'); img.loading='lazy'; img.alt='photo '+(idx+1);
+      img.src = src;
+      item.appendChild(img);
+      item.addEventListener('click',()=> openLightbox(list, idx));
+      grid.appendChild(item);
+    });
+  }
+
+  /* ---------- Lightbox ---------- */
+  const lb = { el:document.getElementById('lightbox'), img:document.getElementById('lbImg'), wrap:document.getElementById('lbImgWrap'),
+    close:document.getElementById('lbClose'), next:document.getElementById('lbNext'), prev:document.getElementById('lbPrev') };
+  let lbList=[], lbIndex=0;
+  function openLightbox(list,idx){
+    if(!lb.el) return; lbList=list; lbIndex=idx;
+    lb.img.src = list[idx]; lb.el.classList.add('active'); lb.el.setAttribute('aria-hidden','false');
+  }
+  function closeLightbox(){ if(!lb.el) return; lb.el.classList.remove('active'); lb.el.setAttribute('aria-hidden','true'); lb.img.src=''; }
+  function lbNext(){ if(lbList.length===0) return; lbIndex=(lbIndex+1)%lbList.length; lb.img.src=lbList[lbIndex]; }
+  function lbPrev(){ if(lbList.length===0) return; lbIndex=(lbIndex-1+lbList.length)%lbList.length; lb.img.src=lbList[lbIndex]; }
+
+  if(lb.close) lb.close.addEventListener('click',closeLightbox);
+  if(lb.next) lb.next.addEventListener('click',()=>{ lbNext(); resetSlideTimer(); });
+  if(lb.prev) lb.prev.addEventListener('click',()=>{ lbPrev(); resetSlideTimer(); });
+  // close on outside click
+  if(lb.el) lb.el.addEventListener('click',(e)=>{ if(e.target===lb.el) closeLightbox(); });
+
+  /* ---------- Quotes auto-rotate ---------- */
+  function startQuoteRotation(){
+    const qEl = document.getElementById('quoteText'); if(!qEl) return;
+    let i=0; setInterval(()=>{ i=(i+1)% (QUOTES[currentLang] ? QUOTES[currentLang].length : QUOTES['en'].length); qEl.style.opacity=0; setTimeout(()=>{ qEl.textContent=(QUOTES[currentLang]||QUOTES['en'])[i]; qEl.style.opacity=1; },300); },5000);
+  }
+
+  /* ---------- WhatsApp hidden (base64) ---------- */
+  // Base64 of "+918712231501" => "KzkxODcxMjIzMTUwMQ==" (we store without plus)
+  const phone_b64 = "KzkxODcxMjIzMTUwMQ==";
+  function getWhatsAppNumber(){ try{ return atob(phone_b64); }catch(e){ return "918712231501"; } }
+  function buildWhatsAppButton(){
+    const wbtn = document.getElementById('whatsappBtn');
+    const waf = document.getElementById('waf');
+    const n = getWhatsAppNumber();
+    const waUrl = `https://wa.me/${encodeURIComponent(n)}?text=${encodeURIComponent('Hello Sanjuthere Agro Exports, I would like to inquire about...')}`;
+    if(wbtn) { wbtn.href = waUrl; }
+    if(waf) { waf.href = waUrl; waf.innerHTML = "💬"; }
+    // also attach to footer social if wanted
+  }
+
+  /* ---------- Init ---------- */
+  async function init(){
+    applyLang(defaultLang);
+    buildWhatsAppButton();
+    startQuoteRotation();
+    // load categories JSON
+    const data = await fetchCategories();
+    if(data){
+      // if file already category-wise
+      if(typeof data === 'object' && (data.farming || data.fruits || data.vegetables)) {
+        buildCategoryControls(data);
+      } else {
+        // older flat array -> put in farming category
+        buildCategoryControls({ farming: Array.isArray(data)?data:[] });
+      }
+    } else {
+      // fallback sample (empty)
+      buildCategoryControls({ farming:[] });
+    }
+  }
+
+  // simple reset timer placeholder for lightbox navigation
+  function resetSlideTimer(){ /* noop */ }
+
+  // run
+  document.addEventListener('DOMContentLoaded', init);
+})();
