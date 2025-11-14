@@ -1,21 +1,27 @@
 {
-  "images": [
-    "https://images.unsplash.com/photo-1678182451047-196f22a4143e?w=1200&q=80",
-    "https://images.unsplash.com/photo-1613690399151-65ea69478674?w=1200&q=80",
-    "https://images.unsplash.com/photo-1605732562742-3023a888e56e?w=1200&q=80",
-    "https://images.unsplash.com/photo-1655164709639-95035bff7ea8?w=1200&q=80",
-    "https://images.unsplash.com/photo-1738162837672-de9d735a9b90?w=1200&q=80",
-    "https://images.unsplash.com/photo-1745448797905-36e057c09088?w=1200&q=80",
+  "farming": [
     "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=1200&q=80",
     "https://images.unsplash.com/photo-1600336754162-dc8d9c46a0d9?w=1200&q=80",
     "https://images.unsplash.com/photo-1591073113125-e46713c829ed?w=1200&q=80",
-    "https://images.unsplash.com/photo-1598454442384-0684e75be91a?w=1200&q=80",
-    "https://images.unsplash.com/photo-1524591237138-252a3df13be0?w=1200&q=80",
-    "https://images.unsplash.com/photo-1501703979959-797917eb21c8?w=1200&q=80",
-    "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=1200&q=80",
-    "https://images.unsplash.com/photo-1596079890687-2f7213f06a51?w=1200&q=80"
-    "images/image003.jpg",
-    "images/image012.jpg",
-    "images/image017.jpg"   
+    "https://images.unsplash.com/photo-1598454442384-0684e75be91a?w=1200&q=80"
+  ],
+  "fruits": [
+    "https://images.unsplash.com/photo-1524594154908-eddff3a82f9e?w=1200&q=80",
+    "https://images.unsplash.com/photo-1464965911861-746a04b4bca9?w=1200&q=80",
+    "https://images.unsplash.com/photo-1514516345957-5565695c1b2e?w=1200&q=80"
+  ],
+  "vegetables": [
+    "https://images.unsplash.com/photo-1506806732259-39c2d0268443?w=1200&q=80",
+    "https://images.unsplash.com/photo-1437750769460-0abd4e59d560?w=1200&q=80",
+    "https://images.unsplash.com/photo-1505253716362-afaea1f043b2?w=1200&q=80"
+  ],
+  "spices": [
+    "https://images.unsplash.com/photo-1603048523898-593a102d01d1?w=1200&q=80",
+    "https://images.unsplash.com/photo-1606813902915-6f0d7d4d2b8a?w=1200&q=80"
+  ],
+  "mandi": [
+    "https://images.unsplash.com/photo-1598554747436-d0a36a83c7d0?w=1200&q=80",
+    "https://images.unsplash.com/photo-1502364141068-e26d9cf01db1?w=1200&q=80"
   ]
 }
+
