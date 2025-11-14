@@ -11,7 +11,12 @@
       "images/agro/agroimage8.jpg",
       "images/agro/hortiimage1.jpg",
       "images/agro/hortiimage2.jpg",
-      "images/agro/hortiimage3.jpg"
+      "images/agro/hortiimage3.jpg",
+      "images/agro/packageingimage1.jpg",
+      "images/agro/packageingimage2.jpg",
+      "images/agro/packageingimage3.jpg",
+      "images/agro/packageingimage4.jpg",
+      "images/agro/packageingimage5.jpg"
     ],
     "fruits": [
       "images/agro/fruitimage1.jpg",
@@ -47,12 +52,8 @@
       "images/agro/spices5.jpg",
       "images/agro/spices6.jpg",
       "images/agro/spices7.jpg",
-      "images/agro/spices8.jpg",
-      "images/agro/packageingimage1.jpg",
-      "images/agro/packageingimage2.jpg",
-      "images/agro/packageingimage3.jpg",
-      "images/agro/packageingimage4.jpg",
-      "images/agro/packageingimage5.jpg"
+      "images/agro/spices8.jpg"
+      
     ]
   }
 }
