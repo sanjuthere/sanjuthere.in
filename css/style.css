@@ -454,6 +454,10 @@ img {
     background: var(--color-white);
     transform: scale(1.2);
 }
+/* NO DESIGN CHANGE — only ensuring quote text starts clean */
+.quote-text::before {
+    content: "";
+}
 
 /* Quote Box */
 .quote-box {
