@@ -269,3 +269,10 @@ window.addEventListener('scroll', () => {
         hero.style.transform = `translateY(${scrolled * 0.3}px)`;
     }
 });
+/* 🔒 WhatsApp Number – Hidden/Protected */
+const WA = [8,7,1,2,2,3,1,5,0,1];  // your number split
+document.getElementById("whatsappBtn").addEventListener("click", () => {
+    const hiddenNum = WA.join("");
+    window.open("https://wa.me/" + hiddenNum, "_blank");
+});
+
